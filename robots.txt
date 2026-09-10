@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://utilmooz.github.io/UtilMooz/sitemap.xml

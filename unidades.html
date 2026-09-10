@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Conversor de Unidades Online | UtilMooz</title>
+
+<meta name="description"
+content="Conversor de unidades online gratis. Convertí longitud, peso, temperatura, volumen, área, velocidad, tiempo, datos digitales, energía, presión y fuerza con UtilMooz.">
+
+<meta name="robots" content="index, follow">
+
+<!-- =========================
+     ADSTERRA POPUNDER
+========================= -->
+
+<script src="https://pl31074088.profitableratecpmnetwork.com/b3/e1/f2/b3e1f2f8b30c35d54a787cfe893ac42b.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    min-height:100vh;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:#111827;
+    color:#ffffff;
+    padding:22px 20px;
+}
+
+.header-content{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#4f8cff;
+}
+
+
+/* =====================================================
+   BOTÓN INICIO
+===================================================== */
+
+.inicio-btn{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    gap:6px;
+
+    padding:10px 18px !important;
+
+    background:linear-gradient(
+        135deg,
+        #4f8cff 0%,
+        #2563eb 100%
+    ) !important;
+
+    color:#ffffff !important;
+
+    text-decoration:none !important;
+
+    font-family:Arial,sans-serif !important;
+    font-size:14px !important;
+    font-weight:700 !important;
+
+    border-radius:9px !important;
+
+    border:1px solid rgba(255,255,255,.10) !important;
+
+    box-shadow:
+        0 4px 10px rgba(37,99,235,.25),
+        inset 0 1px 0 rgba(255,255,255,.20);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.inicio-btn:hover{
+    background:linear-gradient(
+        135deg,
+        #5d96ff 0%,
+        #1d4ed8 100%
+    ) !important;
+
+    color:#ffffff !important;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(37,99,235,.35),
+        inset 0 1px 0 rgba(255,255,255,.20);
+}
+
+.inicio-btn:active{
+    transform:translateY(0);
+
+    box-shadow:
+        0 3px 7px rgba(37,99,235,.22);
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+.container{
+    max-width:700px;
+    margin:50px auto;
+    padding:0 20px 60px;
+}
+
+h1{
+    font-size:36px;
+    margin-bottom:15px;
+    line-height:1.2;
+}
+
+.description{
+    color:#667085;
+    margin-bottom:30px;
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   ANUNCIOS
+===================================================== */
+
+.ad-container{
+    width:100%;
+    min-height:90px;
+    margin:25px 0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.ad-label{
+    font-size:11px;
+    color:#98a2b3;
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.ad-box{
+    width:100%;
+    min-height:90px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   CALCULADORA
+===================================================== */
+
+.calculator{
+    background:#ffffff;
+
+    padding:30px;
+
+    border-radius:16px;
+
+    border:1px solid #e6e8ee;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.05);
+}
+
+label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+    color:#172033;
+}
+
+select,
+input{
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    border:1px solid #d9dde5;
+
+    border-radius:9px;
+
+    font-size:16px;
+
+    background:#ffffff;
+
+    color:#172033;
+
+    outline:none;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+select{
+    cursor:pointer;
+}
+
+select:focus,
+input:focus{
+    border-color:#4f8cff;
+
+    box-shadow:
+        0 0 0 3px rgba(79,140,255,.12);
+}
+
+
+/* =====================================================
+   BOTÓN CONVERTIR
+===================================================== */
+
+#convertirBtn{
+
+    width:100% !important;
+
+    min-height:54px !important;
+
+    padding:15px 22px !important;
+
+    margin-top:2px !important;
+
+    border:none !important;
+
+    border-radius:10px !important;
+
+    background:linear-gradient(
+        135deg,
+        #4f8cff 0%,
+        #2563eb 100%
+    ) !important;
+
+    color:#ffffff !important;
+
+    font-family:Arial,sans-serif !important;
+
+    font-size:17px !important;
+
+    font-weight:700 !important;
+
+    letter-spacing:.2px;
+
+    cursor:pointer;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    gap:9px;
+
+    box-shadow:
+        0 5px 12px rgba(37,99,235,.28),
+        inset 0 1px 0 rgba(255,255,255,.20);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+#convertirBtn:hover{
+
+    background:linear-gradient(
+        135deg,
+        #5d96ff 0%,
+        #1d4ed8 100%
+    ) !important;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.35),
+        inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+#convertirBtn:active{
+
+    transform:translateY(0);
+
+    box-shadow:
+        0 3px 7px rgba(37,99,235,.22);
+}
+
+#convertirBtn:focus-visible{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 4px rgba(79,140,255,.20),
+        0 5px 12px rgba(37,99,235,.28);
+}
+
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+.resultado{
+
+    margin-top:25px;
+
+    padding:22px;
+
+    background:#f5f7fb;
+
+    border:1px solid #e6e8ee;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    line-height:1.7;
+
+    word-break:break-word;
+
+    color:#172033;
+}
+
+.resultado strong{
+    color:#2563eb;
+}
+
+
+/* =====================================================
+   INFORMACIÓN SEO
+===================================================== */
+
+.info{
+    margin-top:35px;
+
+    line-height:1.7;
+
+    color:#4b5563;
+}
+
+.info h2{
+
+    margin-bottom:10px;
+
+    margin-top:25px;
+
+    color:#172033;
+
+    font-size:24px;
+
+    line-height:1.3;
+}
+
+.info p{
+    margin-bottom:16px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    margin-top:60px;
+
+    background:#111827;
+
+    color:#aaa;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media(max-width:600px){
+
+    header{
+        padding:18px 15px;
+    }
+
+    .header-content{
+        max-width:100%;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .inicio-btn{
+        padding:9px 14px !important;
+        font-size:14px !important;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .container{
+        margin:35px auto;
+
+        padding:
+            0 15px 50px;
+    }
+
+    .calculator{
+        padding:22px;
+    }
+
+    select,
+    input{
+        padding:13px;
+        font-size:16px;
+    }
+
+    #convertirBtn{
+        min-height:52px !important;
+        padding:14px 18px !important;
+        font-size:16px !important;
+        border-radius:9px !important;
+    }
+
+    .resultado{
+        font-size:19px;
+        padding:18px 12px;
+    }
+
+    .info h2{
+        font-size:21px;
+    }
+
+    .ad-container{
+        min-height:70px;
+    }
+
+    .ad-box{
+        min-height:70px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+<nav>
+
+<a
+href="index.html"
+class="inicio-btn"
+>
+🏠 Inicio
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main class="container">
+
+
+<h1>
+Conversor de unidades
+</h1>
+
+
+<p class="description">
+
+Convertí fácilmente unidades de longitud, peso, temperatura,
+volumen, área, velocidad, tiempo, datos digitales, energía,
+presión y fuerza con este conversor online gratuito.
+
+</p>
+
+
+<!-- =====================================================
+     ANUNCIO 1
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CALCULADORA
+===================================================== -->
+
+<div class="calculator">
+
+
+<label for="tipo">
+Tipo de conversión
+</label>
+
+
+<select
+id="tipo"
+onchange="cambiarUnidades()"
+>
+
+<option value="longitud">
+📏 Longitud
+</option>
+
+<option value="peso">
+⚖️ Peso y masa
+</option>
+
+<option value="temperatura">
+🌡️ Temperatura
+</option>
+
+<option value="volumen">
+🧪 Volumen
+</option>
+
+<option value="area">
+📐 Área
+</option>
+
+<option value="velocidad">
+🚗 Velocidad
+</option>
+
+<option value="tiempo">
+⏱️ Tiempo
+</option>
+
+<option value="datos">
+💾 Datos digitales
+</option>
+
+<option value="presion">
+🔵 Presión
+</option>
+
+<option value="energia">
+⚡ Energía
+</option>
+
+<option value="fuerza">
+💪 Fuerza
+</option>
+
+</select>
+
+
+<label for="valor">
+Valor
+</label>
+
+
+<input
+type="number"
+id="valor"
+placeholder="Ingresá un valor"
+step="any"
+autocomplete="off"
+>
+
+
+<label for="desde">
+Desde
+</label>
+
+
+<select id="desde"></select>
+
+
+<label for="hasta">
+Hasta
+</label>
+
+
+<select id="hasta"></select>
+
+
+<button
+type="button"
+id="convertirBtn"
+onclick="convertir()"
+>
+⇄ Convertir
+</button>
+
+
+<div
+class="resultado"
+id="resultado"
+aria-live="polite"
+>
+Resultado: -
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     ANUNCIO 2
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script>
+
+atOptions = {
+
+'key' :
+'56c8323b8c9bd2913adcf628996d2229',
+
+'format' :
+'iframe',
+
+'height' :
+60,
+
+'width' :
+468,
+
+'params' :
+{}
+
+};
+
+</script>
+
+
+<script
+src="https://www.highrevenueformat.com/56c8323b8c9bd2913adcf628996d2229/invoke.js">
+</script>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     INFORMACIÓN SEO
+===================================================== -->
+
+<div class="info">
+
+
+<h2>
+Conversor de unidades online
+</h2>
+
+
+<p>
+
+Utilizá UtilMooz para convertir rápidamente diferentes
+unidades de medida desde tu computadora o teléfono móvil,
+sin necesidad de instalar ningún programa.
+
+</p>
+
+
+<h2>
+Conversor de longitud
+</h2>
+
+
+<p>
+
+Convertí milímetros, centímetros, metros, kilómetros,
+pulgadas, pies, yardas, millas y millas náuticas.
+
+</p>
+
+
+<h2>
+Conversor de peso y masa
+</h2>
+
+
+<p>
+
+Convertí miligramos, gramos, kilogramos, toneladas,
+libras, onzas y stone.
+
+</p>
+
+
+<h2>
+Conversor de temperatura
+</h2>
+
+
+<p>
+
+Convertí entre Celsius, Fahrenheit y Kelvin.
+
+</p>
+
+
+<h2>
+Conversor de volumen
+</h2>
+
+
+<p>
+
+Convertí mililitros, centilitros, decilitros, litros,
+metros cúbicos, galones, cuartos, pintas y tazas.
+
+</p>
+
+
+<h2>
+Conversor de área
+</h2>
+
+
+<p>
+
+Convertí milímetros cuadrados, centímetros cuadrados,
+metros cuadrados, kilómetros cuadrados, hectáreas,
+acres y pies cuadrados.
+
+</p>
+
+
+<h2>
+Conversor de velocidad
+</h2>
+
+
+<p>
+
+Convertí metros por segundo, kilómetros por hora,
+millas por hora y nudos.
+
+</p>
+
+
+<h2>
+Conversor de tiempo
+</h2>
+
+
+<p>
+
+Convertí milisegundos, segundos, minutos, horas,
+días y semanas.
+
+</p>
+
+
+<h2>
+Conversor de datos digitales
+</h2>
+
+
+<p>
+
+Convertí bits, bytes, kilobytes, megabytes,
+gigabytes y terabytes.
+
+</p>
+
+
+<h2>
+Conversor de presión
+</h2>
+
+
+<p>
+
+Convertí pascales, kilopascales, bares,
+atmósferas y PSI.
+
+</p>
+
+
+<h2>
+Conversor de energía
+</h2>
+
+
+<p>
+
+Convertí julios, kilojulios, vatios-hora,
+kilovatios-hora y calorías.
+
+</p>
+
+
+<h2>
+Conversor de fuerza
+</h2>
+
+
+<p>
+
+Convertí newtons, kilonewtons, kilogramos-fuerza
+y libras-fuerza.
+
+</p>
+
+
+</div>
+
+
+<!-- =====================================================
+     ANUNCIO 3
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+© 2026 UtilMooz — Herramientas online gratuitas
+
+</footer>
+
+
+<!-- =====================================================
+     ADSTERRA SOCIAL BAR
+===================================================== -->
+
+<script src="https://pl31074089.profitableratecpmnetwork.com/b9/80/b1/b980b1630aa36c566498dbf6055d89ea.js"></script>
+
+
+<script>
+
+/* =====================================================
+   UNIDADES
+===================================================== */
+
+const unidades = {
+
+longitud: [
+
+["Milímetros","mm"],
+["Centímetros","cm"],
+["Metros","m"],
+["Kilómetros","km"],
+["Pulgadas","in"],
+["Pies","ft"],
+["Yardas","yd"],
+["Millas","mi"],
+["Millas náuticas","nmi"]
+
+],
+
+peso: [
+
+["Miligramos","mg"],
+["Gramos","g"],
+["Kilogramos","kg"],
+["Toneladas","t"],
+["Libras","lb"],
+["Onzas","oz"],
+["Stone","st"]
+
+],
+
+temperatura: [
+
+["Celsius","C"],
+["Fahrenheit","F"],
+["Kelvin","K"]
+
+],
+
+volumen: [
+
+["Mililitros","ml"],
+["Centilitros","cl"],
+["Decilitros","dl"],
+["Litros","l"],
+["Metros cúbicos","m3"],
+["Galones US","gal"],
+["Cuartos US","qt"],
+["Pintas US","pt"],
+["Tazas US","cup"]
+
+],
+
+area: [
+
+["Milímetros cuadrados","mm2"],
+["Centímetros cuadrados","cm2"],
+["Metros cuadrados","m2"],
+["Kilómetros cuadrados","km2"],
+["Hectáreas","ha"],
+["Acres","acre"],
+["Pies cuadrados","ft2"]
+
+],
+
+velocidad: [
+
+["Metros por segundo","ms"],
+["Kilómetros por hora","kmh"],
+["Millas por hora","mph"],
+["Nudos","kn"]
+
+],
+
+tiempo: [
+
+["Milisegundos","millisecond"],
+["Segundos","second"],
+["Minutos","minute"],
+["Horas","hour"],
+["Días","day"],
+["Semanas","week"]
+
+],
+
+datos: [
+
+["Bits","bit"],
+["Bytes","B"],
+["Kilobytes","KB"],
+["Megabytes","MB"],
+["Gigabytes","GB"],
+["Terabytes","TB"]
+
+],
+
+presion: [
+
+["Pascales","Pa"],
+["Kilopascales","kPa"],
+["Bares","bar"],
+["Atmósferas","atm"],
+["PSI","psi"]
+
+],
+
+energia: [
+
+["Julios","J"],
+["Kilojulios","kJ"],
+["Vatios-hora","Wh"],
+["Kilovatios-hora","kWh"],
+["Calorías","cal"]
+
+],
+
+fuerza: [
+
+["Newtons","N"],
+["Kilonewtons","kN"],
+["Kilogramos-fuerza","kgf"],
+["Libras-fuerza","lbf"]
+
+]
+
+};
+
+
+/* =====================================================
+   CARGAR UNIDADES
+===================================================== */
+
+function cambiarUnidades(){
+
+const tipo =
+document.getElementById("tipo").value;
+
+const desde =
+document.getElementById("desde");
+
+const hasta =
+document.getElementById("hasta");
+
+desde.innerHTML="";
+hasta.innerHTML="";
+
+
+unidades[tipo].forEach(function(u){
+
+const optionDesde =
+document.createElement("option");
+
+optionDesde.value=u[1];
+
+optionDesde.textContent=u[0];
+
+
+const optionHasta =
+document.createElement("option");
+
+optionHasta.value=u[1];
+
+optionHasta.textContent=u[0];
+
+
+desde.appendChild(optionDesde);
+
+hasta.appendChild(optionHasta);
+
+});
+
+
+if(hasta.options.length>1){
+
+hasta.selectedIndex=1;
+
+}
+
+
+document
+.getElementById("resultado")
+.textContent="Resultado: -";
+
+}
+
+
+/* =====================================================
+   CONVERSIÓN
+===================================================== */
+
+function convertir(){
+
+const valor =
+parseFloat(
+document.getElementById("valor").value
+);
+
+const tipo =
+document.getElementById("tipo").value;
+
+const desde =
+document.getElementById("desde").value;
+
+const hasta =
+document.getElementById("hasta").value;
+
+const resultadoElemento =
+document.getElementById("resultado");
+
+
+if(!Number.isFinite(valor)){
+
+resultadoElemento.textContent =
+"Ingresá un valor válido.";
+
+return;
+
+}
+
+
+let resultado;
+
+
+/* =====================================================
+   LONGITUD
+===================================================== */
+
+if(tipo === "longitud"){
+
+const unidadesBase = {
+
+mm:0.001,
+cm:0.01,
+m:1,
+km:1000,
+in:0.0254,
+ft:0.3048,
+yd:0.9144,
+mi:1609.344,
+nmi:1852
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   PESO
+===================================================== */
+
+else if(tipo === "peso"){
+
+const unidadesBase = {
+
+mg:0.000001,
+g:0.001,
+kg:1,
+t:1000,
+lb:0.45359237,
+oz:0.028349523125,
+st:6.35029318
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   TEMPERATURA
+===================================================== */
+
+else if(tipo === "temperatura"){
+
+let celsius;
+
+if(desde === "C"){
+
+celsius=valor;
+
+}
+
+else if(desde === "F"){
+
+celsius=
+(valor-32)*5/9;
+
+}
+
+else if(desde === "K"){
+
+celsius=
+valor-273.15;
+
+}
+
+else{
+
+resultado=NaN;
+
+}
+
+
+if(hasta === "C"){
+
+resultado=celsius;
+
+}
+
+else if(hasta === "F"){
+
+resultado=
+(celsius*9/5)+32;
+
+}
+
+else if(hasta === "K"){
+
+resultado=
+celsius+273.15;
+
+}
+
+}
+
+
+/* =====================================================
+   VOLUMEN
+===================================================== */
+
+else if(tipo === "volumen"){
+
+const unidadesBase = {
+
+ml:0.001,
+cl:0.01,
+dl:0.1,
+l:1,
+m3:1000,
+gal:3.785411784,
+qt:0.946352946,
+pt:0.473176473,
+cup:0.2365882365
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   ÁREA
+===================================================== */
+
+else if(tipo === "area"){
+
+const unidadesBase = {
+
+mm2:0.000001,
+cm2:0.0001,
+m2:1,
+km2:1000000,
+ha:10000,
+acre:4046.8564224,
+ft2:0.09290304
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   VELOCIDAD
+===================================================== */
+
+else if(tipo === "velocidad"){
+
+const unidadesBase = {
+
+ms:1,
+kmh:0.2777777777777778,
+mph:0.44704,
+kn:0.5144444444444445
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   TIEMPO
+===================================================== */
+
+else if(tipo === "tiempo"){
+
+const unidadesBase = {
+
+millisecond:0.001,
+second:1,
+minute:60,
+hour:3600,
+day:86400,
+week:604800
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   DATOS DIGITALES
+===================================================== */
+
+else if(tipo === "datos"){
+
+const unidadesBase = {
+
+bit:1,
+B:8,
+KB:8000,
+MB:8000000,
+GB:8000000000,
+TB:8000000000000
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   PRESIÓN
+===================================================== */
+
+else if(tipo === "presion"){
+
+const unidadesBase = {
+
+Pa:1,
+kPa:1000,
+bar:100000,
+atm:101325,
+psi:6894.757293168
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   ENERGÍA
+===================================================== */
+
+else if(tipo === "energia"){
+
+const unidadesBase = {
+
+J:1,
+kJ:1000,
+Wh:3600,
+kWh:3600000,
+cal:4.184
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   FUERZA
+===================================================== */
+
+else if(tipo === "fuerza"){
+
+const unidadesBase = {
+
+N:1,
+kN:1000,
+kgf:9.80665,
+lbf:4.4482216153
+
+};
+
+resultado =
+valor *
+unidadesBase[desde] /
+unidadesBase[hasta];
+
+}
+
+
+/* =====================================================
+   VALIDACIÓN
+===================================================== */
+
+if(!Number.isFinite(resultado)){
+
+resultadoElemento.textContent =
+"No se pudo realizar la conversión.";
+
+return;
+
+}
+
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+resultadoElemento.textContent =
+"Resultado: " +
+formatearNumero(resultado);
+
+}
+
+
+/* =====================================================
+   FORMATEAR NÚMERO
+===================================================== */
+
+function formatearNumero(numero){
+
+if(Object.is(numero,-0)){
+
+numero=0;
+
+}
+
+return numero.toLocaleString(
+"es-AR",
+{
+maximumFractionDigits:10
+}
+);
+
+}
+
+
+/* =====================================================
+   ENTER
+===================================================== */
+
+document
+.getElementById("valor")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key==="Enter"){
+
+event.preventDefault();
+
+convertir();
+
+}
+
+});
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+cambiarUnidades();
+
+</script>
+
+
+</body>
+
+</html>

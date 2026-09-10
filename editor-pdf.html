@@ -1,0 +1,3347 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Editor de PDF Online Gratis | UtilMooz</title>
+
+<meta name="description" content="Editá PDF online gratis. Modificá textos, agregá texto, imágenes, firmas y dibujos directamente desde tu navegador con UtilMooz.">
+
+<meta name="robots" content="index, follow">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    line-height:1.5;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:20px;
+}
+
+.header-content{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#4f8cff;
+}
+
+.inicio-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:10px 17px;
+    background:#4f8cff;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+    border-radius:8px;
+}
+
+.inicio-btn:hover{
+    background:#3978e8;
+}
+
+.container{
+    max-width:1250px;
+    margin:35px auto;
+    padding:0 20px 60px;
+}
+
+h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.description{
+    color:#667085;
+    margin-bottom:25px;
+}
+
+.upload-box{
+    background:white;
+    border:2px dashed #cbd5e1;
+    border-radius:16px;
+    padding:60px 25px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.upload-box:hover,
+.upload-box.dragging{
+    border-color:#4f8cff;
+    background:#f8fbff;
+}
+
+.upload-icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.upload-box h2{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.upload-box p{
+    color:#667085;
+    margin-bottom:20px;
+}
+
+.upload-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:13px 22px;
+    background:#4f8cff;
+    color:white;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.upload-button:hover{
+    background:#3978e8;
+}
+
+#fileInput{
+    display:none;
+}
+
+.load-error{
+    display:none;
+    margin-top:15px;
+    padding:14px;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    color:#b91c1c;
+    border-radius:9px;
+    text-align:center;
+}
+
+.editor{
+    display:none;
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 30px rgba(0,0,0,.07);
+}
+
+.toolbar{
+    background:#111827;
+    padding:11px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:7px;
+}
+
+.tool-button{
+    border:none;
+    background:#1f2937;
+    color:white;
+    padding:10px 13px;
+    border-radius:7px;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.tool-button:hover{
+    background:#374151;
+}
+
+.tool-button.active{
+    background:#4f8cff;
+}
+
+.tool-button.danger:hover{
+    background:#dc2626;
+}
+
+.tool-separator{
+    width:1px;
+    height:30px;
+    background:#374151;
+    margin:0 3px;
+}
+
+.editor-body{
+    display:flex;
+    min-height:700px;
+    background:#e5e7eb;
+}
+
+.sidebar{
+    width:180px;
+    background:#f8fafc;
+    border-right:1px solid #dbe1e8;
+    padding:12px;
+    overflow-y:auto;
+}
+
+.sidebar-title{
+    text-align:center;
+    font-size:12px;
+    font-weight:bold;
+    color:#667085;
+    margin-bottom:12px;
+}
+
+.thumbnail{
+    background:white;
+    border:2px solid transparent;
+    border-radius:7px;
+    padding:5px;
+    margin-bottom:12px;
+    cursor:pointer;
+}
+
+.thumbnail:hover{
+    border-color:#93c5fd;
+}
+
+.thumbnail.active{
+    border-color:#4f8cff;
+}
+
+.thumbnail canvas{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+.page-number{
+    text-align:center;
+    font-size:12px;
+    color:#667085;
+    padding-top:4px;
+}
+
+.workspace{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow:auto;
+    padding:25px;
+}
+
+.page-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.page-controls button{
+    border:1px solid #d5dbe5;
+    background:white;
+    padding:8px 13px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.page-info{
+    font-size:14px;
+    font-weight:bold;
+    color:#475467;
+}
+
+.pdf-stage{
+    position:relative;
+    display:inline-block;
+    background:white;
+    box-shadow:0 5px 25px rgba(0,0,0,.18);
+    line-height:0;
+}
+
+#pdfCanvas{
+    display:block;
+}
+
+#overlayCanvas{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:5;
+    touch-action:none;
+}
+
+#textLayer{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    pointer-events:none;
+}
+
+.text-hit{
+    position:absolute;
+    color:transparent;
+    background:transparent;
+    border:1px solid transparent;
+    cursor:pointer;
+    overflow:hidden;
+    white-space:nowrap;
+    user-select:none;
+    line-height:1;
+    pointer-events:auto;
+}
+
+.text-hit:hover{
+    background:rgba(79,140,255,.18);
+    border:1px dashed #4f8cff;
+}
+
+.text-hit.selected{
+    background:rgba(79,140,255,.28);
+    border:2px solid #4f8cff;
+}
+
+.bottom-toolbar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.zoom-control{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:white;
+    padding:6px;
+    border:1px solid #dbe1e8;
+    border-radius:8px;
+}
+
+.zoom-control button{
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:6px;
+    background:#f1f5f9;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#zoomValue{
+    min-width:50px;
+    text-align:center;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.download-button{
+    border:none;
+    background:#16a34a;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.download-button:hover{
+    background:#15803d;
+}
+
+.help-box{
+    max-width:900px;
+    margin:18px auto 0;
+    padding:13px 17px;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+    color:#1d4ed8;
+    font-size:13px;
+    text-align:center;
+}
+
+.status{
+    display:none;
+    margin-top:15px;
+    padding:10px 15px;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    color:#1d4ed8;
+    border-radius:8px;
+    text-align:center;
+    font-size:13px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.58);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:450px;
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.modal-box h3{
+    margin-bottom:15px;
+}
+
+.modal-box input,
+.modal-box select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d5dbe5;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.modal-box label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#475467;
+}
+
+.modal-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+    flex-wrap:wrap;
+}
+
+.modal-buttons button{
+    border:none;
+    padding:10px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.cancel-btn{
+    background:#e5e7eb;
+}
+
+.confirm-btn{
+    background:#4f8cff;
+    color:white;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+}
+
+.signature-canvas{
+    width:100%;
+    height:180px;
+    border:2px dashed #cbd5e1;
+    border-radius:8px;
+    background:white;
+    cursor:crosshair;
+    touch-action:none;
+}
+
+.info{
+    margin-top:50px;
+    color:#4b5563;
+    line-height:1.7;
+}
+
+.info h2{
+    color:#172033;
+    font-size:24px;
+    margin:25px 0 10px;
+}
+
+.info p{
+    margin-bottom:15px;
+}
+
+footer{
+    background:#111827;
+    color:#aaa;
+    text-align:center;
+    padding:30px;
+}
+
+@media(max-width:800px){
+
+    h1{
+        font-size:30px;
+    }
+
+    .editor-body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        height:135px;
+        display:flex;
+        gap:10px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        border-right:none;
+        border-bottom:1px solid #dbe1e8;
+    }
+
+    .sidebar-title{
+        display:none;
+    }
+
+    .thumbnail{
+        min-width:85px;
+        width:85px;
+        margin-bottom:0;
+        flex-shrink:0;
+    }
+
+    .workspace{
+        padding:15px 5px 25px;
+    }
+
+    .toolbar{
+        justify-content:center;
+    }
+
+    .tool-separator{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+<a href="index.html" class="inicio-btn">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+stroke-linejoin="round">
+<path d="M3 10.5L12 3l9 7.5"></path>
+<path d="M5.5 9.5V21h13V9.5"></path>
+<path d="M9.5 21v-6h5v6"></path>
+</svg>
+Inicio
+</a>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<h1>Editor de PDF online</h1>
+
+<p class="description">
+Editá tus documentos PDF directamente desde tu navegador.
+Podés modificar texto, agregar contenido, imágenes, firmas y dibujos.
+</p>
+
+<div class="upload-box" id="uploadBox">
+
+<div class="upload-icon">📄</div>
+
+<h2>Subí tu archivo PDF</h2>
+
+<p>Arrastrá un PDF aquí o seleccioná un archivo.</p>
+
+<label for="fileInput" class="upload-button">
+📂 Seleccionar PDF
+</label>
+
+<input type="file" id="fileInput" accept=".pdf,application/pdf">
+
+</div>
+
+<div class="load-error" id="loadError"></div>
+
+<div class="editor" id="editor">
+
+<div class="toolbar">
+
+<button class="tool-button" id="selectTextTool"
+onclick="activarSeleccionTexto()">
+🖱️ Editar texto
+</button>
+
+<button class="tool-button" id="textTool"
+onclick="activarTexto()">
+✏️ Agregar texto
+</button>
+
+<button class="tool-button" id="drawTool"
+onclick="activarDibujo()">
+🖊️ Dibujar
+</button>
+
+<button class="tool-button"
+onclick="agregarImagen()">
+🖼️ Imagen
+</button>
+
+<button class="tool-button"
+onclick="abrirFirma()">
+✍️ Firma
+</button>
+
+<div class="tool-separator"></div>
+
+<button class="tool-button"
+onclick="rotarPagina()">
+🔄 Rotar
+</button>
+
+<button class="tool-button"
+onclick="moverPagina(-1)">
+⬆️ Subir
+</button>
+
+<button class="tool-button"
+onclick="moverPagina(1)">
+⬇️ Bajar
+</button>
+
+<button class="tool-button danger"
+onclick="eliminarPagina()">
+🗑️ Eliminar
+</button>
+
+<div class="tool-separator"></div>
+
+<button class="tool-button"
+onclick="limpiarEdicion()">
+🧹 Limpiar
+</button>
+
+</div>
+
+<div class="editor-body">
+
+<aside class="sidebar">
+
+<div class="sidebar-title">
+PÁGINAS
+</div>
+
+<div id="thumbnails"></div>
+
+</aside>
+
+<section class="workspace">
+
+<div class="page-controls">
+
+<button onclick="paginaAnterior()">◀</button>
+
+<div class="page-info" id="pageInfo">
+Página 1 de 1
+</div>
+
+<button onclick="paginaSiguiente()">▶</button>
+
+</div>
+
+<div class="pdf-stage" id="pdfStage">
+
+<canvas id="pdfCanvas"></canvas>
+
+<canvas id="overlayCanvas"></canvas>
+
+<div id="textLayer"></div>
+
+</div>
+
+<div class="help-box">
+
+💡 <b>Editar texto:</b>
+activá la herramienta y hacé clic sobre el texto del PDF.
+Podés reemplazarlo o eliminarlo.
+
+</div>
+
+<div class="bottom-toolbar">
+
+<div class="zoom-control">
+
+<button onclick="cambiarZoom(-0.1)">−</button>
+
+<span id="zoomValue">100%</span>
+
+<button onclick="cambiarZoom(0.1)">+</button>
+
+</div>
+
+<button class="download-button"
+onclick="descargarPDF()">
+💾 Descargar PDF editado
+</button>
+
+</div>
+
+<div class="status" id="status">
+Listo.
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+<section class="info">
+
+<h2>Editor de PDF online gratis</h2>
+
+<p>
+UtilMooz permite trabajar con documentos PDF directamente desde
+el navegador sin necesidad de instalar programas.
+</p>
+
+<h2>Modificar texto de un PDF</h2>
+
+<p>
+La herramienta detecta el texto existente en el documento.
+Al seleccionar una palabra o frase podés reemplazarla o eliminarla.
+</p>
+
+<h2>Agregar contenido</h2>
+
+<p>
+También podés agregar texto, imágenes, dibujos y firmas,
+además de reorganizar, rotar y eliminar páginas.
+</p>
+
+<h2>Privacidad</h2>
+
+<p>
+El procesamiento se realiza directamente en el navegador.
+El archivo PDF no necesita ser enviado a un servidor.
+</p>
+
+</section>
+
+</main>
+
+<!-- MODAL TEXTO -->
+
+<div class="modal" id="textModal">
+
+<div class="modal-box">
+
+<h3>Agregar texto</h3>
+
+<input type="text"
+id="textInput"
+placeholder="Escribí el texto..."
+maxlength="1000">
+
+<label>Tamaño</label>
+
+<select id="textSize">
+<option value="10">10</option>
+<option value="12">12</option>
+<option value="14">14</option>
+<option value="16" selected>16</option>
+<option value="18">18</option>
+<option value="20">20</option>
+<option value="24">24</option>
+<option value="30">30</option>
+<option value="40">40</option>
+</select>
+
+<label>Color</label>
+
+<input type="color"
+id="textColor"
+value="#111827">
+
+<div class="modal-buttons">
+
+<button class="cancel-btn"
+onclick="cerrarModalTexto()">
+Cancelar
+</button>
+
+<button class="confirm-btn"
+onclick="confirmarTexto()">
+Guardar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MODAL EDITAR -->
+
+<div class="modal" id="editTextModal">
+
+<div class="modal-box">
+
+<h3>Modificar texto</h3>
+
+<p id="originalText"
+style="font-size:13px;color:#667085;margin-bottom:12px;">
+</p>
+
+<input type="text"
+id="replacementText"
+placeholder="Nuevo texto..."
+maxlength="1000">
+
+<label>Tamaño</label>
+
+<select id="replacementSize">
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="14">14</option>
+<option value="16" selected>16</option>
+<option value="18">18</option>
+<option value="20">20</option>
+<option value="24">24</option>
+<option value="30">30</option>
+<option value="40">40</option>
+</select>
+
+<div class="modal-buttons">
+
+<button class="cancel-btn"
+onclick="cerrarEditarTexto()">
+Cancelar
+</button>
+
+<button class="delete-btn"
+onclick="eliminarTextoSeleccionado()">
+Eliminar
+</button>
+
+<button class="confirm-btn"
+onclick="guardarTextoEditado()">
+Reemplazar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MODAL FIRMA -->
+
+<div class="modal" id="signatureModal">
+
+<div class="modal-box">
+
+<h3>Crear firma</h3>
+
+<p style="font-size:13px;color:#667085;margin-bottom:10px;">
+Dibujá tu firma dentro del cuadro.
+</p>
+
+<canvas id="signatureCanvas"
+class="signature-canvas"></canvas>
+
+<div class="modal-buttons">
+
+<button class="cancel-btn"
+onclick="limpiarFirma()">
+Limpiar
+</button>
+
+<button class="confirm-btn"
+onclick="confirmarFirma()">
+Usar firma
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 UtilMooz — Herramientas online gratuitas
+</footer>
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN
+========================================================= */
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let pdfOriginal = null;
+let pdfBytes = null;
+let paginas = [];
+let paginaActual = 0;
+let zoom = 1;
+
+let herramienta = null;
+
+let dibujando = false;
+let ultimoX = 0;
+let ultimoY = 0;
+
+let textoSeleccionado = null;
+let posicionTexto = null;
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const fileInput = document.getElementById("fileInput");
+const uploadBox = document.getElementById("uploadBox");
+const editor = document.getElementById("editor");
+
+const pdfCanvas = document.getElementById("pdfCanvas");
+const overlayCanvas = document.getElementById("overlayCanvas");
+
+const pdfStage = document.getElementById("pdfStage");
+const textLayer = document.getElementById("textLayer");
+
+const thumbnails = document.getElementById("thumbnails");
+
+const statusBox = document.getElementById("status");
+const loadError = document.getElementById("loadError");
+
+
+/* =========================================================
+   ESTRUCTURA DE PÁGINA
+========================================================= */
+
+function nuevaPaginaData(originalIndex){
+
+    return {
+
+        originalIndex: originalIndex,
+
+        rotation: 0,
+
+        drawings: [],
+
+        texts: [],
+
+        images: [],
+
+        replacements: []
+
+    };
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function mostrarErrorCarga(mensaje){
+
+    loadError.textContent = mensaje;
+    loadError.style.display = "block";
+
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+fileInput.addEventListener("change", async function(){
+
+    const archivo = this.files && this.files[0];
+
+    if(!archivo) return;
+
+    await cargarPDF(archivo);
+
+    this.value = "";
+
+});
+
+
+/* =========================================================
+   DRAG DROP
+========================================================= */
+
+uploadBox.addEventListener("dragover", function(event){
+
+    event.preventDefault();
+
+    uploadBox.classList.add("dragging");
+
+});
+
+
+uploadBox.addEventListener("dragleave", function(){
+
+    uploadBox.classList.remove("dragging");
+
+});
+
+
+uploadBox.addEventListener("drop", async function(event){
+
+    event.preventDefault();
+
+    uploadBox.classList.remove("dragging");
+
+    const archivos = event.dataTransfer.files;
+
+    if(!archivos || !archivos.length) return;
+
+    const archivo = archivos[0];
+
+    if(
+        archivo.type !== "application/pdf" &&
+        !archivo.name.toLowerCase().endsWith(".pdf")
+    ){
+
+        mostrarErrorCarga("El archivo seleccionado no es un PDF.");
+
+        return;
+
+    }
+
+    await cargarPDF(archivo);
+
+});
+
+
+/* =========================================================
+   CARGAR PDF
+========================================================= */
+
+async function cargarPDF(archivo){
+
+    try{
+
+        loadError.style.display = "none";
+
+        mostrarEstado("Leyendo archivo PDF...");
+
+        if(typeof pdfjsLib === "undefined"){
+            throw new Error("PDF.js no está disponible.");
+        }
+
+        if(typeof PDFLib === "undefined"){
+            throw new Error("PDF-LIB no está disponible.");
+        }
+
+        if(archivo.size === 0){
+            throw new Error("El archivo está vacío.");
+        }
+
+        if(archivo.size > 100 * 1024 * 1024){
+            throw new Error("El archivo supera los 100 MB.");
+        }
+
+        const buffer = await archivo.arrayBuffer();
+
+        pdfBytes = new Uint8Array(buffer.slice(0));
+
+        mostrarEstado("Abriendo PDF...");
+
+        const loadingTask = pdfjsLib.getDocument({
+            data: pdfBytes.slice(0),
+            verbosity: 0
+        });
+
+        pdfOriginal = await loadingTask.promise;
+
+        paginas = [];
+
+        for(let i = 0; i < pdfOriginal.numPages; i++){
+
+            paginas.push(
+                nuevaPaginaData(i)
+            );
+
+        }
+
+        paginaActual = 0;
+        zoom = 1;
+        herramienta = null;
+        textoSeleccionado = null;
+
+        uploadBox.style.display = "none";
+        editor.style.display = "block";
+
+        await crearMiniaturas();
+        await renderizarPagina();
+
+        mostrarEstado("✅ PDF cargado correctamente.");
+
+    }catch(error){
+
+        console.error(error);
+
+        pdfOriginal = null;
+        paginas = [];
+
+        editor.style.display = "none";
+        uploadBox.style.display = "block";
+
+        mostrarErrorCarga(
+            "No se pudo cargar el PDF. " +
+            (error.message || "")
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MINIATURAS
+========================================================= */
+
+async function crearMiniaturas(){
+
+    thumbnails.innerHTML = "";
+
+    if(!pdfOriginal) return;
+
+    for(let i = 0; i < paginas.length; i++){
+
+        const datos = paginas[i];
+
+        const div = document.createElement("div");
+
+        div.className = "thumbnail";
+
+        if(i === paginaActual){
+            div.classList.add("active");
+        }
+
+        div.dataset.page = i;
+
+        const canvas = document.createElement("canvas");
+
+        div.appendChild(canvas);
+
+        const numero = document.createElement("div");
+
+        numero.className = "page-number";
+        numero.textContent = "Página " + (i + 1);
+
+        div.appendChild(numero);
+
+        div.onclick = function(){
+
+            seleccionarPagina(i);
+
+        };
+
+        thumbnails.appendChild(div);
+
+        try{
+
+            const page = await pdfOriginal.getPage(
+                datos.originalIndex + 1
+            );
+
+            const viewport = page.getViewport({
+                scale: .22,
+                rotation: datos.rotation
+            });
+
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            await page.render({
+                canvasContext: canvas.getContext("2d"),
+                viewport: viewport
+            }).promise;
+
+        }catch(error){
+
+            console.error("Error miniatura:", error);
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECCIONAR PÁGINA
+========================================================= */
+
+async function seleccionarPagina(indice){
+
+    if(indice < 0 || indice >= paginas.length) return;
+
+    paginaActual = indice;
+
+    actualizarMiniaturas();
+
+    await renderizarPagina();
+
+}
+
+
+/* =========================================================
+   MINIATURAS ACTIVAS
+========================================================= */
+
+function actualizarMiniaturas(){
+
+    document.querySelectorAll(".thumbnail").forEach(function(item){
+
+        item.classList.remove("active");
+
+    });
+
+    const actual = document.querySelector(
+        '.thumbnail[data-page="' + paginaActual + '"]'
+    );
+
+    if(actual){
+        actual.classList.add("active");
+    }
+
+}
+
+
+/* =========================================================
+   RENDERIZAR PÁGINA
+========================================================= */
+
+async function renderizarPagina(){
+
+    if(!pdfOriginal || !paginas.length) return;
+
+    const datos = paginas[paginaActual];
+
+    const page = await pdfOriginal.getPage(
+        datos.originalIndex + 1
+    );
+
+    const escala = 1.25 * zoom;
+
+    const viewport = page.getViewport({
+        scale: escala,
+        rotation: datos.rotation
+    });
+
+    pdfCanvas.width = Math.ceil(viewport.width);
+    pdfCanvas.height = Math.ceil(viewport.height);
+
+    overlayCanvas.width = Math.ceil(viewport.width);
+    overlayCanvas.height = Math.ceil(viewport.height);
+
+    pdfStage.style.width = viewport.width + "px";
+    pdfStage.style.height = viewport.height + "px";
+
+    textLayer.style.width = viewport.width + "px";
+    textLayer.style.height = viewport.height + "px";
+
+    const ctx = pdfCanvas.getContext("2d");
+
+    ctx.clearRect(
+        0,
+        0,
+        pdfCanvas.width,
+        pdfCanvas.height
+    );
+
+    await page.render({
+        canvasContext: ctx,
+        viewport: viewport
+    }).promise;
+
+    textLayer.innerHTML = "";
+
+    if(herramienta === "seleccionarTexto"){
+
+        await crearTextosDetectables(
+            page,
+            viewport
+        );
+
+    }
+
+    redibujarOverlay();
+
+    document.getElementById("pageInfo").textContent =
+        "Página " +
+        (paginaActual + 1) +
+        " de " +
+        paginas.length;
+
+    document.getElementById("zoomValue").textContent =
+        Math.round(zoom * 100) + "%";
+
+}
+
+
+/* =========================================================
+   DETECTAR TEXTO
+========================================================= */
+
+async function crearTextosDetectables(page, viewport){
+
+    if(paginas[paginaActual].rotation !== 0){
+
+        mostrarEstado(
+            "Para editar texto existente, poné la página en rotación normal."
+        );
+
+        return;
+
+    }
+
+    const contenido = await page.getTextContent();
+
+    contenido.items.forEach(function(item){
+
+        if(!item.str || !item.str.trim()) return;
+
+        /*
+         * ==================================================
+         * CORRECCIÓN IMPORTANTE
+         *
+         * Antes se utilizaba la coordenada transformada
+         * por viewport y luego se volvía a convertir.
+         *
+         * Eso provocaba que al exportar el reemplazo
+         * apareciera en una posición incorrecta.
+         *
+         * Ahora guardamos directamente las coordenadas
+         * NATIVAS del PDF provenientes de item.transform.
+         * ==================================================
+         */
+
+        const tx = item.transform;
+
+        const pdfX = tx[4];
+        const pdfY = tx[5];
+
+        const fontHeight = Math.max(
+            5,
+            Math.abs(tx[3])
+        );
+
+        const pdfWidth = Math.max(
+            3,
+            Math.abs(item.width)
+        );
+
+        /*
+         * Para mostrar el área en pantalla utilizamos
+         * viewport.transform solamente para dibujar
+         * el botón de selección.
+         */
+
+        const transform = pdfjsLib.Util.transform(
+            viewport.transform,
+            tx
+        );
+
+        const screenX = transform[4];
+        const screenBaseline = transform[5];
+
+        const screenHeight = Math.max(
+            8,
+            Math.abs(transform[3])
+        );
+
+        const screenWidth = Math.max(
+            5,
+            pdfWidth * viewport.scale
+        );
+
+        const hit = document.createElement("div");
+
+        hit.className = "text-hit";
+
+        hit.textContent = item.str;
+
+        hit.style.left = screenX + "px";
+
+        hit.style.top =
+            (screenBaseline - screenHeight) + "px";
+
+        hit.style.width =
+            screenWidth + "px";
+
+        hit.style.height =
+            screenHeight + "px";
+
+        hit.title = "Editar: " + item.str;
+
+        hit.onclick = function(event){
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            seleccionarTextoPDF({
+
+                text: item.str,
+
+                /*
+                 * COORDENADAS NATIVAS DEL PDF
+                 */
+                x: pdfX,
+                y: pdfY,
+
+                width: pdfWidth,
+
+                height: fontHeight,
+
+                size: fontHeight,
+
+                /*
+                 * Datos visuales
+                 */
+                screenX: screenX,
+                screenY: screenBaseline,
+
+                element: hit
+
+            });
+
+        };
+
+        textLayer.appendChild(hit);
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTIVAR EDICIÓN DE TEXTO
+========================================================= */
+
+async function activarSeleccionTexto(){
+
+    herramienta = "seleccionarTexto";
+
+    document.getElementById("selectTextTool")
+        .classList.add("active");
+
+    document.getElementById("textTool")
+        .classList.remove("active");
+
+    document.getElementById("drawTool")
+        .classList.remove("active");
+
+    overlayCanvas.style.cursor = "default";
+
+    textLayer.style.pointerEvents = "auto";
+
+    await renderizarPagina();
+
+    mostrarEstado(
+        "🖱️ Modo editar activo. Hacé clic sobre cualquier texto."
+    );
+
+}
+
+
+/* =========================================================
+   SELECCIONAR TEXTO
+========================================================= */
+
+function seleccionarTextoPDF(info){
+
+    textoSeleccionado = info;
+
+    if(info.element){
+
+        info.element.classList.add("selected");
+
+    }
+
+    document.getElementById("originalText").textContent =
+        "Texto original: " + info.text;
+
+    document.getElementById("replacementText").value =
+        info.text;
+
+    const tamaño = Math.max(
+        8,
+        Math.min(
+            40,
+            Math.round(info.size || info.height)
+        )
+    );
+
+    document.getElementById("replacementSize").value =
+        String(tamaño);
+
+    document.getElementById("editTextModal").style.display =
+        "flex";
+
+    setTimeout(function(){
+
+        const campo =
+            document.getElementById("replacementText");
+
+        campo.focus();
+        campo.select();
+
+    },50);
+
+}
+
+
+/* =========================================================
+   GUARDAR REEMPLAZO
+========================================================= */
+
+function guardarTextoEditado(){
+
+    if(!textoSeleccionado){
+
+        alert("No seleccionaste ningún texto.");
+
+        return;
+
+    }
+
+    const nuevo =
+        document.getElementById("replacementText")
+        .value.trim();
+
+    if(!nuevo){
+
+        alert("Escribí el nuevo texto.");
+
+        return;
+
+    }
+
+    const tamaño =
+        Number(
+            document.getElementById("replacementSize")
+            .value
+        );
+
+    const datos = paginas[paginaActual];
+
+    /*
+     * Buscamos por coordenadas NATIVAS del PDF.
+     */
+
+    const existente =
+        datos.replacements.find(function(item){
+
+            return (
+                Math.abs(item.x - textoSeleccionado.x) < .5 &&
+                Math.abs(item.y - textoSeleccionado.y) < .5
+            );
+
+        });
+
+
+    const reemplazo = {
+
+        original:
+            textoSeleccionado.text,
+
+        newText:
+            nuevo,
+
+        /*
+         * COORDENADAS NATIVAS
+         */
+        x:
+            textoSeleccionado.x,
+
+        y:
+            textoSeleccionado.y,
+
+        width:
+            textoSeleccionado.width,
+
+        height:
+            textoSeleccionado.height,
+
+        size:
+            tamaño
+
+    };
+
+
+    if(existente){
+
+        Object.assign(
+            existente,
+            reemplazo
+        );
+
+    }else{
+
+        datos.replacements.push(
+            reemplazo
+        );
+
+    }
+
+
+    cerrarEditarTexto();
+
+    herramienta = "seleccionarTexto";
+
+    textLayer.style.pointerEvents = "auto";
+
+    renderizarPagina();
+
+    mostrarEstado(
+        "✅ Texto reemplazado. Descargá el PDF para guardar el cambio."
+    );
+
+}
+
+
+/* =========================================================
+   ELIMINAR TEXTO
+========================================================= */
+
+function eliminarTextoSeleccionado(){
+
+    if(!textoSeleccionado) return;
+
+    const datos = paginas[paginaActual];
+
+    const existente =
+        datos.replacements.find(function(item){
+
+            return (
+                Math.abs(item.x - textoSeleccionado.x) < .5 &&
+                Math.abs(item.y - textoSeleccionado.y) < .5
+            );
+
+        });
+
+
+    const eliminacion = {
+
+        original:
+            textoSeleccionado.text,
+
+        newText:
+            "",
+
+        x:
+            textoSeleccionado.x,
+
+        y:
+            textoSeleccionado.y,
+
+        width:
+            textoSeleccionado.width,
+
+        height:
+            textoSeleccionado.height,
+
+        size:
+            textoSeleccionado.height
+
+    };
+
+
+    if(existente){
+
+        Object.assign(
+            existente,
+            eliminacion
+        );
+
+    }else{
+
+        datos.replacements.push(
+            eliminacion
+        );
+
+    }
+
+
+    cerrarEditarTexto();
+
+    herramienta = "seleccionarTexto";
+
+    textLayer.style.pointerEvents = "auto";
+
+    renderizarPagina();
+
+    mostrarEstado(
+        "🗑️ Texto marcado para eliminar. Descargá el PDF para guardar."
+    );
+
+}
+
+
+/* =========================================================
+   CERRAR EDITAR
+========================================================= */
+
+function cerrarEditarTexto(){
+
+    document.getElementById(
+        "editTextModal"
+    ).style.display = "none";
+
+    if(
+        textoSeleccionado &&
+        textoSeleccionado.element
+    ){
+
+        textoSeleccionado.element.classList.remove(
+            "selected"
+        );
+
+    }
+
+    textoSeleccionado = null;
+
+}
+
+
+/* =========================================================
+   AGREGAR TEXTO
+========================================================= */
+
+function activarTexto(){
+
+    herramienta = "texto";
+
+    overlayCanvas.style.cursor = "text";
+
+    textLayer.style.pointerEvents = "none";
+
+    document.getElementById("textTool")
+        .classList.add("active");
+
+    document.getElementById("drawTool")
+        .classList.remove("active");
+
+    document.getElementById("selectTextTool")
+        .classList.remove("active");
+
+    textLayer.innerHTML = "";
+
+    mostrarEstado(
+        "✏️ Hacé clic donde quieras agregar texto."
+    );
+
+}
+
+
+/* =========================================================
+   CLICK NUEVO TEXTO
+========================================================= */
+
+overlayCanvas.addEventListener("click",function(event){
+
+    if(herramienta !== "texto") return;
+
+    const punto = obtenerCoordenadasPDF(event);
+
+    posicionTexto = punto;
+
+    document.getElementById("textModal")
+        .style.display = "flex";
+
+    setTimeout(function(){
+
+        document.getElementById("textInput").focus();
+
+    },50);
+
+});
+
+
+/* =========================================================
+   COORDENADAS NUEVO TEXTO
+========================================================= */
+
+function obtenerCoordenadasPDF(event){
+
+    const rect =
+        overlayCanvas.getBoundingClientRect();
+
+    const px =
+        (
+            event.clientX -
+            rect.left
+        ) *
+        (
+            overlayCanvas.width /
+            rect.width
+        );
+
+    const py =
+        (
+            event.clientY -
+            rect.top
+        ) *
+        (
+            overlayCanvas.height /
+            rect.height
+        );
+
+    const escala =
+        1.25 * zoom;
+
+    return {
+
+        x:
+            px / escala,
+
+        y:
+            (
+                overlayCanvas.height -
+                py
+            ) / escala
+
+    };
+
+}
+
+
+/* =========================================================
+   CONFIRMAR TEXTO
+========================================================= */
+
+function confirmarTexto(){
+
+    const texto =
+        document.getElementById("textInput")
+        .value.trim();
+
+    if(!texto){
+
+        alert("Escribí un texto.");
+
+        return;
+
+    }
+
+    const tamaño =
+        Number(
+            document.getElementById("textSize").value
+        );
+
+    const color =
+        document.getElementById("textColor").value;
+
+    paginas[paginaActual].texts.push({
+
+        text: texto,
+
+        x: posicionTexto.x,
+
+        y: posicionTexto.y,
+
+        size: tamaño,
+
+        color: color
+
+    });
+
+    document.getElementById("textInput").value = "";
+
+    cerrarModalTexto();
+
+    redibujarOverlay();
+
+    mostrarEstado("✏️ Texto agregado.");
+
+}
+
+
+function cerrarModalTexto(){
+
+    document.getElementById("textModal")
+        .style.display = "none";
+
+}
+
+
+/* =========================================================
+   DIBUJAR
+========================================================= */
+
+function activarDibujo(){
+
+    herramienta = "dibujo";
+
+    overlayCanvas.style.cursor = "crosshair";
+
+    textLayer.style.pointerEvents = "none";
+
+    document.getElementById("drawTool")
+        .classList.add("active");
+
+    document.getElementById("textTool")
+        .classList.remove("active");
+
+    document.getElementById("selectTextTool")
+        .classList.remove("active");
+
+    textLayer.innerHTML = "";
+
+    mostrarEstado(
+        "🖊️ Mantené presionado y dibujá sobre el PDF."
+    );
+
+}
+
+
+/* =========================================================
+   DIBUJO
+========================================================= */
+
+overlayCanvas.addEventListener("pointerdown",function(event){
+
+    if(herramienta !== "dibujo") return;
+
+    dibujando = true;
+
+    const punto = obtenerCoordenadasPDF(event);
+
+    ultimoX = punto.x;
+    ultimoY = punto.y;
+
+    overlayCanvas.setPointerCapture(
+        event.pointerId
+    );
+
+});
+
+
+overlayCanvas.addEventListener("pointermove",function(event){
+
+    if(
+        !dibujando ||
+        herramienta !== "dibujo"
+    ) return;
+
+    const punto =
+        obtenerCoordenadasPDF(event);
+
+    paginas[paginaActual].drawings.push({
+
+        x1: ultimoX,
+        y1: ultimoY,
+
+        x2: punto.x,
+        y2: punto.y
+
+    });
+
+    ultimoX = punto.x;
+    ultimoY = punto.y;
+
+    redibujarOverlay();
+
+});
+
+
+overlayCanvas.addEventListener("pointerup",function(){
+
+    dibujando = false;
+
+});
+
+
+overlayCanvas.addEventListener("pointercancel",function(){
+
+    dibujando = false;
+
+});
+
+
+/* =========================================================
+   PDF A PANTALLA
+========================================================= */
+
+function pdfToScreen(x,y){
+
+    const escala = 1.25 * zoom;
+
+    return {
+
+        x: x * escala,
+
+        y:
+            overlayCanvas.height -
+            y * escala
+
+    };
+
+}
+
+
+/* =========================================================
+   REDIBUJAR OVERLAY
+========================================================= */
+
+function redibujarOverlay(){
+
+    const ctx =
+        overlayCanvas.getContext("2d");
+
+    ctx.clearRect(
+        0,
+        0,
+        overlayCanvas.width,
+        overlayCanvas.height
+    );
+
+    if(!paginas[paginaActual]) return;
+
+    const datos = paginas[paginaActual];
+
+    const escala = 1.25 * zoom;
+
+
+    /* DIBUJOS */
+
+    ctx.strokeStyle = "#ef4444";
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+
+    datos.drawings.forEach(function(linea){
+
+        const inicio =
+            pdfToScreen(
+                linea.x1,
+                linea.y1
+            );
+
+        const fin =
+            pdfToScreen(
+                linea.x2,
+                linea.y2
+            );
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            inicio.x,
+            inicio.y
+        );
+
+        ctx.lineTo(
+            fin.x,
+            fin.y
+        );
+
+        ctx.stroke();
+
+    });
+
+
+    /* TEXTOS NUEVOS */
+
+    datos.texts.forEach(function(texto){
+
+        const punto =
+            pdfToScreen(
+                texto.x,
+                texto.y
+            );
+
+        ctx.fillStyle =
+            texto.color || "#111827";
+
+        ctx.font =
+            texto.size * escala +
+            "px Arial";
+
+        ctx.fillText(
+            texto.text,
+            punto.x,
+            punto.y
+        );
+
+    });
+
+
+    /*
+     * =====================================================
+     * REEMPLAZOS VISUALES
+     * =====================================================
+     */
+
+    datos.replacements.forEach(function(item){
+
+        const x =
+            item.x * escala;
+
+        const baseline =
+            overlayCanvas.height -
+            item.y * escala;
+
+        const width =
+            item.width * escala;
+
+        const height =
+            item.height * escala;
+
+
+        /*
+         * Tapamos exactamente la zona aproximada
+         * del texto original.
+         */
+
+        ctx.fillStyle = "#ffffff";
+
+        ctx.fillRect(
+
+            x - 3,
+
+            baseline -
+            height -
+            3,
+
+            width + 8,
+
+            height + 8
+
+        );
+
+
+        /*
+         * Texto nuevo.
+         */
+
+        if(item.newText){
+
+            ctx.fillStyle = "#111827";
+
+            ctx.font =
+                item.size * escala +
+                "px Arial";
+
+            ctx.fillText(
+
+                item.newText,
+
+                x,
+
+                baseline
+
+            );
+
+        }
+
+    });
+
+
+    /* IMÁGENES */
+
+    datos.images.forEach(function(item){
+
+        if(
+            !item.image ||
+            !item.image.complete
+        ) return;
+
+        const x =
+            item.x * escala;
+
+        const y =
+            overlayCanvas.height -
+            (
+                item.y +
+                item.height
+            ) * escala;
+
+        ctx.drawImage(
+
+            item.image,
+
+            x,
+            y,
+
+            item.width * escala,
+            item.height * escala
+
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+function agregarImagen(){
+
+    const input =
+        document.createElement("input");
+
+    input.type = "file";
+
+    input.accept =
+        "image/png,image/jpeg,image/jpg";
+
+    input.onchange = function(){
+
+        if(!this.files.length) return;
+
+        const reader =
+            new FileReader();
+
+        reader.onload = function(event){
+
+            const imagen =
+                new Image();
+
+            imagen.onload = function(){
+
+                const escala =
+                    1.25 * zoom;
+
+                const pageWidth =
+                    overlayCanvas.width /
+                    escala;
+
+                const pageHeight =
+                    overlayCanvas.height /
+                    escala;
+
+                const maxWidth =
+                    pageWidth * .45;
+
+                const ratio =
+                    Math.min(
+                        1,
+                        maxWidth /
+                        imagen.width
+                    );
+
+                const width =
+                    imagen.width * ratio;
+
+                const height =
+                    imagen.height * ratio;
+
+                paginas[paginaActual].images.push({
+
+                    image: imagen,
+
+                    data:
+                        event.target.result,
+
+                    x:
+                        (pageWidth - width) / 2,
+
+                    y:
+                        (pageHeight - height) / 2,
+
+                    width: width,
+
+                    height: height
+
+                });
+
+                redibujarOverlay();
+
+                mostrarEstado(
+                    "🖼️ Imagen agregada."
+                );
+
+            };
+
+            imagen.src =
+                event.target.result;
+
+        };
+
+        reader.readAsDataURL(
+            this.files[0]
+        );
+
+    };
+
+    input.click();
+
+}
+
+
+/* =========================================================
+   FIRMA
+========================================================= */
+
+const signatureCanvas =
+    document.getElementById(
+        "signatureCanvas"
+    );
+
+const signatureCtx =
+    signatureCanvas.getContext("2d");
+
+let firmando = false;
+let firmaX = 0;
+let firmaY = 0;
+
+
+function prepararFirma(){
+
+    const rect =
+        signatureCanvas.getBoundingClientRect();
+
+    const ratio =
+        window.devicePixelRatio || 1;
+
+    signatureCanvas.width =
+        rect.width * ratio;
+
+    signatureCanvas.height =
+        rect.height * ratio;
+
+    signatureCtx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+    signatureCtx.lineWidth = 2.5;
+    signatureCtx.lineCap = "round";
+    signatureCtx.strokeStyle = "#111827";
+
+}
+
+
+function abrirFirma(){
+
+    document.getElementById(
+        "signatureModal"
+    ).style.display = "flex";
+
+    setTimeout(
+        prepararFirma,
+        50
+    );
+
+}
+
+
+signatureCanvas.addEventListener(
+"pointerdown",
+function(event){
+
+    const rect =
+        signatureCanvas.getBoundingClientRect();
+
+    firmaX =
+        event.clientX -
+        rect.left;
+
+    firmaY =
+        event.clientY -
+        rect.top;
+
+    firmando = true;
+
+    signatureCanvas.setPointerCapture(
+        event.pointerId
+    );
+
+});
+
+
+signatureCanvas.addEventListener(
+"pointermove",
+function(event){
+
+    if(!firmando) return;
+
+    const rect =
+        signatureCanvas.getBoundingClientRect();
+
+    const x =
+        event.clientX -
+        rect.left;
+
+    const y =
+        event.clientY -
+        rect.top;
+
+    signatureCtx.beginPath();
+
+    signatureCtx.moveTo(
+        firmaX,
+        firmaY
+    );
+
+    signatureCtx.lineTo(
+        x,
+        y
+    );
+
+    signatureCtx.stroke();
+
+    firmaX = x;
+    firmaY = y;
+
+});
+
+
+signatureCanvas.addEventListener(
+"pointerup",
+function(){
+
+    firmando = false;
+
+});
+
+
+signatureCanvas.addEventListener(
+"pointercancel",
+function(){
+
+    firmando = false;
+
+});
+
+
+function limpiarFirma(){
+
+    signatureCtx.clearRect(
+        0,
+        0,
+        signatureCanvas.width,
+        signatureCanvas.height
+    );
+
+}
+
+
+function confirmarFirma(){
+
+    const data =
+        signatureCanvas.toDataURL(
+            "image/png"
+        );
+
+    const imagen =
+        new Image();
+
+    imagen.onload = function(){
+
+        const escala =
+            1.25 * zoom;
+
+        const pageWidth =
+            overlayCanvas.width /
+            escala;
+
+        const pageHeight =
+            overlayCanvas.height /
+            escala;
+
+        const maxWidth =
+            pageWidth * .45;
+
+        const ratio =
+            Math.min(
+                1,
+                maxWidth /
+                imagen.width
+            );
+
+        const width =
+            imagen.width * ratio;
+
+        const height =
+            imagen.height * ratio;
+
+        paginas[paginaActual].images.push({
+
+            image: imagen,
+
+            data: data,
+
+            x:
+                (pageWidth - width) / 2,
+
+            y:
+                (pageHeight - height) / 2,
+
+            width: width,
+
+            height: height
+
+        });
+
+        redibujarOverlay();
+
+        cerrarFirma();
+
+        mostrarEstado(
+            "✍️ Firma agregada."
+        );
+
+    };
+
+    imagen.src = data;
+
+}
+
+
+function cerrarFirma(){
+
+    document.getElementById(
+        "signatureModal"
+    ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   ROTAR
+========================================================= */
+
+async function rotarPagina(){
+
+    if(!paginas[paginaActual]) return;
+
+    paginas[paginaActual].rotation =
+        (
+            paginas[paginaActual].rotation +
+            90
+        ) % 360;
+
+    await crearMiniaturas();
+    await renderizarPagina();
+
+    mostrarEstado("🔄 Página rotada.");
+
+}
+
+
+/* =========================================================
+   MOVER PÁGINA
+========================================================= */
+
+async function moverPagina(direccion){
+
+    const nuevoIndice =
+        paginaActual + direccion;
+
+    if(
+        nuevoIndice < 0 ||
+        nuevoIndice >= paginas.length
+    ) return;
+
+    const temporal =
+        paginas[paginaActual];
+
+    paginas[paginaActual] =
+        paginas[nuevoIndice];
+
+    paginas[nuevoIndice] =
+        temporal;
+
+    paginaActual =
+        nuevoIndice;
+
+    await crearMiniaturas();
+    await renderizarPagina();
+
+    mostrarEstado(
+        "↕️ Orden de páginas actualizado."
+    );
+
+}
+
+
+/* =========================================================
+   ELIMINAR PÁGINA
+========================================================= */
+
+async function eliminarPagina(){
+
+    if(paginas.length <= 1){
+
+        alert(
+            "El documento debe tener al menos una página."
+        );
+
+        return;
+
+    }
+
+    if(!confirm("¿Eliminar esta página?")) return;
+
+    paginas.splice(
+        paginaActual,
+        1
+    );
+
+    if(
+        paginaActual >= paginas.length
+    ){
+
+        paginaActual =
+            paginas.length - 1;
+
+    }
+
+    await crearMiniaturas();
+    await renderizarPagina();
+
+    mostrarEstado(
+        "🗑️ Página eliminada."
+    );
+
+}
+
+
+/* =========================================================
+   LIMPIAR
+========================================================= */
+
+async function limpiarEdicion(){
+
+    if(!paginas[paginaActual]) return;
+
+    if(
+        !confirm(
+            "¿Eliminar todas las modificaciones de esta página?"
+        )
+    ) return;
+
+    paginas[paginaActual].drawings = [];
+    paginas[paginaActual].texts = [];
+    paginas[paginaActual].images = [];
+    paginas[paginaActual].replacements = [];
+
+    await renderizarPagina();
+
+    mostrarEstado(
+        "🧹 Modificaciones eliminadas."
+    );
+
+}
+
+
+/* =========================================================
+   ZOOM
+========================================================= */
+
+async function cambiarZoom(valor){
+
+    zoom += valor;
+
+    if(zoom < .5) zoom = .5;
+    if(zoom > 2.5) zoom = 2.5;
+
+    await renderizarPagina();
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+function paginaAnterior(){
+
+    if(paginaActual > 0){
+
+        seleccionarPagina(
+            paginaActual - 1
+        );
+
+    }
+
+}
+
+
+function paginaSiguiente(){
+
+    if(
+        paginaActual <
+        paginas.length - 1
+    ){
+
+        seleccionarPagina(
+            paginaActual + 1
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   COLOR HEX
+========================================================= */
+
+function hexToRgb(hex){
+
+    hex =
+        hex.replace("#","");
+
+    if(hex.length === 3){
+
+        hex =
+            hex
+            .split("")
+            .map(function(c){
+
+                return c + c;
+
+            })
+            .join("");
+
+    }
+
+    return {
+
+        r:
+            parseInt(
+                hex.substring(0,2),
+                16
+            ) / 255,
+
+        g:
+            parseInt(
+                hex.substring(2,4),
+                16
+            ) / 255,
+
+        b:
+            parseInt(
+                hex.substring(4,6),
+                16
+            ) / 255
+
+    };
+
+}
+
+
+/* =========================================================
+   DESCARGAR PDF
+========================================================= */
+
+async function descargarPDF(){
+
+    if(
+        !pdfOriginal ||
+        !pdfBytes ||
+        !paginas.length
+    ){
+
+        alert(
+            "Primero cargá un PDF."
+        );
+
+        return;
+
+    }
+
+    try{
+
+        mostrarEstado(
+            "⏳ Generando PDF editado..."
+        );
+
+        const documento =
+            await PDFLib.PDFDocument.load(
+                pdfBytes.slice(0)
+            );
+
+        const nuevoPDF =
+            await PDFLib.PDFDocument.create();
+
+        const fuente =
+            await nuevoPDF.embedFont(
+                PDFLib.StandardFonts.Helvetica
+            );
+
+
+        /*
+         * ==================================================
+         * RECORRER PÁGINAS EN EL NUEVO ORDEN
+         * ==================================================
+         */
+
+        for(
+            let i = 0;
+            i < paginas.length;
+            i++
+        ){
+
+            const datos =
+                paginas[i];
+
+            const paginasCopiadas =
+                await nuevoPDF.copyPages(
+                    documento,
+                    [
+                        datos.originalIndex
+                    ]
+                );
+
+            const paginaPDF =
+                paginasCopiadas[0];
+
+            nuevoPDF.addPage(
+                paginaPDF
+            );
+
+            const page =
+                nuevoPDF.getPage(
+                    nuevoPDF.getPageCount() - 1
+                );
+
+
+            /* =================================================
+               ROTACIÓN
+            ================================================= */
+
+            if(datos.rotation){
+
+                page.setRotation(
+                    PDFLib.degrees(
+                        datos.rotation
+                    )
+                );
+
+            }
+
+
+            /* =================================================
+               DIBUJOS
+            ================================================= */
+
+            for(
+                const linea of datos.drawings
+            ){
+
+                page.drawLine({
+
+                    start:{
+                        x: linea.x1,
+                        y: linea.y1
+                    },
+
+                    end:{
+                        x: linea.x2,
+                        y: linea.y2
+                    },
+
+                    thickness:2,
+
+                    color:
+                        PDFLib.rgb(
+                            .94,
+                            .26,
+                            .26
+                        )
+
+                });
+
+            }
+
+
+            /* =================================================
+               TEXTOS NUEVOS
+            ================================================= */
+
+            for(
+                const texto of datos.texts
+            ){
+
+                const rgb =
+                    hexToRgb(
+                        texto.color ||
+                        "#111827"
+                    );
+
+                page.drawText(
+                    texto.text,
+                    {
+
+                        x:
+                            texto.x,
+
+                        y:
+                            texto.y,
+
+                        size:
+                            texto.size,
+
+                        font:
+                            fuente,
+
+                        color:
+                            PDFLib.rgb(
+                                rgb.r,
+                                rgb.g,
+                                rgb.b
+                            )
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               REEMPLAZOS
+            ================================================= */
+
+            for(
+                const item of datos.replacements
+            ){
+
+                /*
+                 * =================================================
+                 * CORRECCIÓN PRINCIPAL
+                 *
+                 * item.y ahora es la coordenada NATIVA del PDF.
+                 *
+                 * En PDF-LIB la posición Y comienza desde ABAJO.
+                 *
+                 * El baseline del texto está en item.y.
+                 *
+                 * Por eso la cobertura comienza en:
+                 *
+                 * item.y - item.height
+                 *
+                 * =================================================
+                 */
+
+                const coberturaX =
+                    item.x - 2;
+
+                const coberturaY =
+                    item.y -
+                    item.height -
+                    2;
+
+                const coberturaWidth =
+                    Math.max(
+                        item.width + 8,
+                        10
+                    );
+
+                const coberturaHeight =
+                    Math.max(
+                        item.height + 8,
+                        10
+                    );
+
+
+                /*
+                 * TAPAR TEXTO ORIGINAL
+                 */
+
+                page.drawRectangle({
+
+                    x:
+                        coberturaX,
+
+                    y:
+                        coberturaY,
+
+                    width:
+                        coberturaWidth,
+
+                    height:
+                        coberturaHeight,
+
+                    color:
+                        PDFLib.rgb(
+                            1,
+                            1,
+                            1
+                        ),
+
+                    opacity:1
+
+                });
+
+
+                /*
+                 * ESCRIBIR TEXTO NUEVO
+                 */
+
+                if(
+                    item.newText &&
+                    item.newText.trim()
+                ){
+
+                    page.drawText(
+                        item.newText,
+                        {
+
+                            x:
+                                item.x,
+
+                            y:
+                                item.y,
+
+                            size:
+                                Math.max(
+                                    1,
+                                    item.size
+                                ),
+
+                            font:
+                                fuente,
+
+                            color:
+                                PDFLib.rgb(
+                                    .07,
+                                    .09,
+                                    .13
+                                )
+
+                        }
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               IMÁGENES
+            ================================================= */
+
+            for(
+                const imagen of datos.images
+            ){
+
+                if(!imagen.data) continue;
+
+                try{
+
+                    let imagenPDF;
+
+                    if(
+                        imagen.data.startsWith(
+                            "data:image/jpeg"
+                        ) ||
+                        imagen.data.startsWith(
+                            "data:image/jpg"
+                        )
+                    ){
+
+                        imagenPDF =
+                            await nuevoPDF.embedJpg(
+                                imagen.data
+                            );
+
+                    }else{
+
+                        imagenPDF =
+                            await nuevoPDF.embedPng(
+                                imagen.data
+                            );
+
+                    }
+
+                    page.drawImage(
+                        imagenPDF,
+                        {
+
+                            x:
+                                imagen.x,
+
+                            y:
+                                imagen.y,
+
+                            width:
+                                imagen.width,
+
+                            height:
+                                imagen.height
+
+                        }
+                    );
+
+                }catch(error){
+
+                    console.error(
+                        "Error imagen:",
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        mostrarEstado(
+            "⏳ Finalizando archivo..."
+        );
+
+
+        const resultado =
+            await nuevoPDF.save();
+
+
+        const blob =
+            new Blob(
+                [resultado],
+                {
+                    type:
+                        "application/pdf"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const enlace =
+            document.createElement("a");
+
+
+        enlace.href = url;
+
+        enlace.download =
+            "UtilMooz-PDF-editado.pdf";
+
+
+        document.body.appendChild(enlace);
+
+        enlace.click();
+
+        enlace.remove();
+
+
+        setTimeout(function(){
+
+            URL.revokeObjectURL(url);
+
+        },1500);
+
+
+        mostrarEstado(
+            "✅ PDF editado generado correctamente."
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "ERROR AL GENERAR PDF:",
+            error
+        );
+
+        alert(
+            "No se pudo generar el PDF. " +
+            (error.message || "")
+        );
+
+        mostrarEstado(
+            "❌ Error al generar el PDF."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+function mostrarEstado(texto){
+
+    statusBox.textContent = texto;
+
+    statusBox.style.display = "block";
+
+    clearTimeout(
+        window.estadoTimeout
+    );
+
+    window.estadoTimeout =
+        setTimeout(function(){
+
+            statusBox.style.display =
+                "none";
+
+        },5000);
+
+}
+
+
+/* =========================================================
+   ENTER
+========================================================= */
+
+document.getElementById("textInput")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        confirmarTexto();
+
+    }
+
+});
+
+
+document.getElementById("replacementText")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        guardarTextoEditado();
+
+    }
+
+});
+
+
+/* =========================================================
+   CERRAR MODALES
+========================================================= */
+
+document.getElementById("textModal")
+.addEventListener("click",function(event){
+
+    if(event.target === this){
+
+        cerrarModalTexto();
+
+    }
+
+});
+
+
+document.getElementById("editTextModal")
+.addEventListener("click",function(event){
+
+    if(event.target === this){
+
+        cerrarEditarTexto();
+
+    }
+
+});
+
+
+document.getElementById("signatureModal")
+.addEventListener("click",function(event){
+
+    if(event.target === this){
+
+        cerrarFirma();
+
+    }
+
+});
+
+
+/* =========================================================
+   INICIO
+========================================================= */
+
+console.log(
+    "UtilMooz PDF Editor iniciado correctamente."
+);
+
+</script>
+
+</body>
+</html>
+

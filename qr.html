@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Generador QR Online Gratis | UtilMooz</title>
+
+<meta name="description"
+content="Generador QR online gratis. Creá códigos QR para URLs, WiFi, WhatsApp, email, teléfono, Bitcoin, Ethereum y más.">
+
+<meta name="robots" content="index, follow">
+
+<!-- =====================================================
+     ADSTERRA POPUNDER
+===================================================== -->
+
+<script src="https://pl31074088.profitableratecpmnetwork.com/b3/e1/f2/b3e1f2f8b30c35d54a787cfe893ac42b.js"></script>
+
+<!-- =====================================================
+     LIBRERÍA QR
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:#111827;
+    color:white;
+    padding:22px 20px;
+}
+
+.header-content{
+    max-width:1000px;
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#4f8cff;
+}
+
+
+/* =====================================================
+   BOTON INICIO
+===================================================== */
+
+.inicio-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
+    padding:10px 17px;
+
+    background:#4f8cff;
+
+    color:white !important;
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:8px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:0 3px 10px rgba(0,0,0,.18);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.inicio-btn:hover{
+
+    background:#3978e8;
+
+    color:white !important;
+
+    transform:translateY(-1px);
+
+    box-shadow:0 5px 14px rgba(0,0,0,.25);
+}
+
+.inicio-btn:active{
+
+    transform:translateY(0);
+
+    box-shadow:0 2px 7px rgba(0,0,0,.18);
+}
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
+
+.container{
+    max-width:800px;
+    margin:45px auto;
+    padding:0 20px 60px;
+}
+
+
+/* =====================================================
+   TITULO
+===================================================== */
+
+h1{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.description{
+    color:#667085;
+    line-height:1.6;
+    margin-bottom:30px;
+}
+
+
+/* =====================================================
+   ANUNCIOS
+===================================================== */
+
+.ad-container{
+    width:100%;
+    min-height:90px;
+
+    margin:25px auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+    text-align:center;
+}
+
+.ad-label{
+    font-size:11px;
+    color:#98a2b3;
+    margin-bottom:7px;
+}
+
+.ad-box{
+    width:100%;
+    min-height:90px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.panel{
+    background:white;
+
+    padding:30px;
+
+    border-radius:16px;
+
+    border:1px solid #e6e8ee;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+label{
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+}
+
+select,
+input,
+textarea{
+
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid #d9dde5;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    margin-bottom:15px;
+
+    font-family:Arial,sans-serif;
+
+    background:white;
+
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+select:focus,
+input:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:#4f8cff;
+
+    box-shadow:
+        0 0 0 3px rgba(79,140,255,.10);
+}
+
+
+/* =====================================================
+   BOTON GENERAR QR
+===================================================== */
+
+.generate-button{
+
+    width:100%;
+
+    min-height:52px;
+
+    padding:14px 22px;
+
+    margin-top:5px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        135deg,
+        #4f8cff 0%,
+        #2563eb 100%
+    );
+
+    color:#ffffff;
+
+    font-family:Arial,sans-serif;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    letter-spacing:.2px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    box-shadow:
+        0 5px 12px rgba(37,99,235,.25),
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+
+/* ICONO */
+
+.generate-button::before{
+
+    content:"▣";
+
+    font-size:19px;
+
+    line-height:1;
+}
+
+
+/* HOVER */
+
+.generate-button:hover{
+
+    background:linear-gradient(
+        135deg,
+        #5d96ff 0%,
+        #1d4ed8 100%
+    );
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.32),
+        inset 0 1px 0 rgba(255,255,255,.20);
+}
+
+
+/* CLICK */
+
+.generate-button:active{
+
+    transform:translateY(0);
+
+    box-shadow:
+        0 3px 7px rgba(37,99,235,.22);
+}
+
+
+/* FOCUS */
+
+.generate-button:focus-visible{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 4px rgba(79,140,255,.20),
+        0 5px 12px rgba(37,99,235,.25);
+}
+
+
+/* =====================================================
+   QR
+===================================================== */
+
+#qrcode{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:30px;
+
+    padding:20px;
+
+    min-height:20px;
+
+    background:white;
+
+    border-radius:10px;
+}
+
+#qrcode canvas,
+#qrcode img{
+
+    max-width:100%;
+
+    height:auto;
+}
+
+
+/* =====================================================
+   DESCARGA
+===================================================== */
+
+.download{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:#16a34a;
+
+    color:white;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+    box-shadow:0 3px 8px rgba(22,163,74,.18);
+}
+
+.download:hover{
+
+    background:#15803d;
+
+    transform:translateY(-1px);
+
+    box-shadow:0 5px 12px rgba(22,163,74,.22);
+}
+
+
+/* =====================================================
+   MENSAJES
+===================================================== */
+
+.mensaje{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    display:none;
+
+    line-height:1.5;
+}
+
+.mensaje.error{
+
+    display:block;
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+}
+
+.mensaje.exito{
+
+    display:block;
+
+    background:#dcfce7;
+
+    color:#15803d;
+}
+
+
+/* =====================================================
+   INFORMACION
+===================================================== */
+
+.info{
+
+    margin-top:35px;
+
+    line-height:1.7;
+
+    color:#4b5563;
+}
+
+.info h2{
+
+    margin-bottom:10px;
+
+    margin-top:25px;
+
+    color:#172033;
+
+    font-size:24px;
+}
+
+.info p{
+
+    margin-bottom:12px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    background:#111827;
+
+    color:#aaa;
+
+    text-align:center;
+
+    padding:30px;
+
+    margin-top:20px;
+}
+
+
+/* =====================================================
+   MOVIL
+===================================================== */
+
+@media(max-width:600px){
+
+    header{
+        padding:18px 15px;
+    }
+
+    .header-content{
+        gap:10px;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+
+    .inicio-btn{
+
+        padding:9px 13px;
+
+        font-size:13px;
+
+        border-radius:7px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .container{
+
+        margin:35px auto;
+
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .panel{
+        padding:22px;
+    }
+
+    .ad-container{
+        min-height:70px;
+    }
+
+    .generate-button{
+
+        min-height:50px;
+
+        padding:13px 18px;
+
+        font-size:15px;
+
+        border-radius:9px;
+    }
+
+    #qrcode{
+        padding:15px;
+    }
+
+    #qrcode canvas,
+    #qrcode img{
+
+        width:100%;
+
+        max-width:300px;
+
+        height:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+<nav>
+
+<a
+href="index.html"
+class="inicio-btn">
+
+🏠 Inicio
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main class="container">
+
+<!-- =====================================================
+     ANUNCIO 1
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     TITULO
+===================================================== -->
+
+<h1>
+Generador de códigos QR
+</h1>
+
+<p class="description">
+
+Creá códigos QR gratis para enlaces, WiFi, WhatsApp, email,
+teléfonos, ubicaciones, contactos, eventos y criptomonedas.
+
+</p>
+
+<!-- =====================================================
+     GENERADOR
+===================================================== -->
+
+<div class="panel">
+
+<label for="tipo">
+Tipo de QR
+</label>
+
+<select
+id="tipo"
+onchange="crearFormulario()">
+
+<option value="url">
+🌐 URL
+</option>
+
+<option value="texto">
+📝 Texto
+</option>
+
+<option value="wifi">
+📶 WiFi
+</option>
+
+<option value="whatsapp">
+💬 WhatsApp
+</option>
+
+<option value="email">
+📧 Email
+</option>
+
+<option value="telefono">
+📞 Teléfono
+</option>
+
+<option value="sms">
+📱 SMS
+</option>
+
+<option value="ubicacion">
+📍 Ubicación
+</option>
+
+<option value="contacto">
+👤 Contacto
+</option>
+
+<option value="evento">
+📅 Evento
+</option>
+
+<option value="bitcoin">
+₿ Bitcoin
+</option>
+
+<option value="ethereum">
+Ξ Ethereum
+</option>
+
+</select>
+
+<div id="formulario"></div>
+
+<button
+class="generate-button"
+type="button"
+onclick="generar()">
+
+Generar código QR
+
+</button>
+
+<div
+id="mensaje"
+class="mensaje">
+</div>
+
+<div id="qrcode"></div>
+
+<a
+id="download"
+class="download"
+href="#">
+
+⬇ Descargar código QR
+
+</a>
+
+</div>
+
+<!-- =====================================================
+     ANUNCIO 2
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script>
+
+atOptions = {
+
+    'key' : '56c8323b8c9bd2913adcf628996d2229',
+
+    'format' : 'iframe',
+
+    'height' : 60,
+
+    'width' : 468,
+
+    'params' : {}
+
+};
+
+</script>
+
+<script
+src="https://www.highrevenueformat.com/56c8323b8c9bd2913adcf628996d2229/invoke.js">
+</script>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     INFORMACION SEO
+===================================================== -->
+
+<div class="info">
+
+<h2>
+Generador de códigos QR online
+</h2>
+
+<p>
+
+Creá códigos QR gratis directamente desde tu navegador.
+No necesitás instalar ningún programa.
+
+</p>
+
+<p>
+
+Podés generar códigos QR para páginas web, textos,
+redes WiFi, WhatsApp, correos electrónicos, teléfonos,
+ubicaciones, contactos, eventos y direcciones de
+criptomonedas.
+
+</p>
+
+<p>
+
+El código QR se genera directamente en tu dispositivo.
+Una vez creado, podés descargarlo como imagen PNG.
+
+</p>
+
+<h2>
+¿Qué tipos de códigos QR podés crear?
+</h2>
+
+<p>
+
+UtilMooz permite generar códigos QR para URLs, textos,
+redes WiFi, WhatsApp, email, llamadas telefónicas, SMS,
+ubicaciones, contactos, eventos, Bitcoin y Ethereum.
+
+</p>
+
+<h2>
+¿Cómo crear un código QR?
+</h2>
+
+<p>
+
+Seleccioná el tipo de código QR que querés crear,
+completá los datos solicitados y presioná el botón
+"Generar código QR".
+
+</p>
+
+<p>
+
+El código aparecerá automáticamente en la pantalla y
+podrás descargarlo como una imagen PNG.
+
+</p>
+
+<h2>
+¿Es gratis el generador QR?
+</h2>
+
+<p>
+
+Sí. El generador de códigos QR de UtilMooz puede utilizarse
+gratuitamente desde cualquier dispositivo con un navegador web.
+
+</p>
+
+</div>
+
+<!-- =====================================================
+     ANUNCIO 3
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+© 2026 UtilMooz — Herramientas online gratuitas
+
+</footer>
+
+<!-- =====================================================
+     ADSTERRA SOCIAL BAR
+===================================================== -->
+
+<script
+src="https://pl31074089.profitableratecpmnetwork.com/b9/80/b1/b980b1630aa36c566498dbf6055d89ea.js">
+</script>
+
+<script>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+const formulario =
+document.getElementById("formulario");
+
+const qrcode =
+document.getElementById("qrcode");
+
+const download =
+document.getElementById("download");
+
+const mensaje =
+document.getElementById("mensaje");
+
+
+/* =====================================================
+   CREAR CAMPO
+===================================================== */
+
+function campo(
+    label,
+    id,
+    placeholder="",
+    type="text"
+){
+
+    return `
+
+    <label for="${id}">
+        ${label}
+    </label>
+
+    <input
+        id="${id}"
+        type="${type}"
+        placeholder="${placeholder}"
+        autocomplete="off">
+
+    `;
+
+}
+
+
+/* =====================================================
+   CREAR FORMULARIO
+===================================================== */
+
+function crearFormulario(){
+
+    const tipo =
+    document.getElementById("tipo").value;
+
+    let html = "";
+
+
+    /* URL */
+
+    if(tipo === "url"){
+
+        html = campo(
+            "URL",
+            "url",
+            "https://ejemplo.com",
+            "url"
+        );
+
+    }
+
+
+    /* TEXTO */
+
+    else if(tipo === "texto"){
+
+        html = `
+
+        <label for="texto">
+            Texto
+        </label>
+
+        <textarea
+            id="texto"
+            placeholder="Escribí el texto que querés convertir en QR"></textarea>
+
+    `;
+
+}
+
+
+/* WIFI */
+
+else if(tipo === "wifi"){
+
+    html =
+    campo(
+        "Nombre de la red WiFi",
+        "ssid",
+        "MiWiFi"
+    );
+
+    html +=
+    campo(
+        "Contraseña",
+        "wifiPassword",
+        "Contraseña",
+        "password"
+    );
+
+    html += `
+
+    <label for="seguridad">
+        Seguridad
+    </label>
+
+    <select id="seguridad">
+
+        <option value="WPA">
+            WPA / WPA2
+        </option>
+
+        <option value="WEP">
+            WEP
+        </option>
+
+        <option value="nopass">
+            Sin contraseña
+        </option>
+
+    </select>
+
+    `;
+
+}
+
+
+/* WHATSAPP */
+
+else if(tipo === "whatsapp"){
+
+    html =
+    campo(
+        "Número con código de país",
+        "numero",
+        "5491122334455"
+    );
+
+    html += `
+
+    <label for="mensajeWhatsapp">
+        Mensaje
+    </label>
+
+    <textarea
+        id="mensajeWhatsapp"
+        placeholder="Mensaje opcional"></textarea>
+
+    `;
+
+}
+
+
+/* EMAIL */
+
+else if(tipo === "email"){
+
+    html =
+    campo(
+        "Email",
+        "email",
+        "correo@ejemplo.com",
+        "email"
+    );
+
+    html +=
+    campo(
+        "Asunto",
+        "asunto",
+        "Asunto del correo"
+    );
+
+    html += `
+
+    <label for="mensajeEmail">
+        Mensaje
+    </label>
+
+    <textarea
+        id="mensajeEmail"
+        placeholder="Escribí el mensaje"></textarea>
+
+    `;
+
+}
+
+
+/* TELEFONO */
+
+else if(tipo === "telefono"){
+
+    html =
+    campo(
+        "Número de teléfono",
+        "numero",
+        "+549..."
+    );
+
+}
+
+
+/* SMS */
+
+else if(tipo === "sms"){
+
+    html =
+    campo(
+        "Número",
+        "numero",
+        "+549..."
+    );
+
+    html += `
+
+    <label for="mensajeSMS">
+        Mensaje
+    </label>
+
+    <textarea
+        id="mensajeSMS"
+        placeholder="Escribí el mensaje"></textarea>
+
+    `;
+
+}
+
+
+/* UBICACION */
+
+else if(tipo === "ubicacion"){
+
+    html =
+    campo(
+        "Latitud",
+        "lat",
+        "-27.78"
+    );
+
+    html +=
+    campo(
+        "Longitud",
+        "lon",
+        "-64.26"
+    );
+
+}
+
+
+/* CONTACTO */
+
+else if(tipo === "contacto"){
+
+    html =
+    campo(
+        "Nombre",
+        "nombre",
+        "Juan Pérez"
+    );
+
+    html +=
+    campo(
+        "Teléfono",
+        "telefono",
+        "+549..."
+    );
+
+    html +=
+    campo(
+        "Email",
+        "emailContacto",
+        "correo@ejemplo.com",
+        "email"
+    );
+
+    html +=
+    campo(
+        "Empresa",
+        "empresa",
+        "Mi empresa"
+    );
+
+    html +=
+    campo(
+        "Sitio web",
+        "web",
+        "https://ejemplo.com",
+        "url"
+    );
+
+}
+
+
+/* EVENTO */
+
+else if(tipo === "evento"){
+
+    html =
+    campo(
+        "Título",
+        "titulo",
+        "Mi evento"
+    );
+
+    html +=
+    campo(
+        "Lugar",
+        "lugar",
+        "Ubicación"
+    );
+
+    html +=
+    campo(
+        "Fecha y hora de inicio",
+        "inicio",
+        "",
+        "datetime-local"
+    );
+
+    html +=
+    campo(
+        "Fecha y hora de finalización",
+        "fin",
+        "",
+        "datetime-local"
+    );
+
+}
+
+
+/* BITCOIN */
+
+else if(tipo === "bitcoin"){
+
+    html =
+    campo(
+        "Dirección Bitcoin",
+        "direccionBitcoin",
+        "bc1..."
+    );
+
+    html +=
+    campo(
+        "Monto BTC (opcional)",
+        "montoBitcoin",
+        "0.001",
+        "number"
+    );
+
+}
+
+
+/* ETHEREUM */
+
+else if(tipo === "ethereum"){
+
+    html =
+    campo(
+        "Dirección Ethereum",
+        "direccionEthereum",
+        "0x..."
+    );
+
+    html +=
+    campo(
+        "Monto ETH (opcional)",
+        "montoEthereum",
+        "0.01",
+        "number"
+    );
+
+}
+
+
+formulario.innerHTML =
+html;
+
+}
+
+/* =====================================================
+GENERAR QR
+===================================================== */
+
+function generar(){
+
+const tipo =
+document.getElementById("tipo").value;
+
+let data = "";
+
+ocultarMensaje();
+
+
+/* URL */
+
+if(tipo === "url"){
+
+    const campoURL =
+    document.getElementById("url");
+
+    let url =
+    campoURL.value.trim();
+
+    if(!url){
+
+        mostrarMensaje(
+            "Ingresá una URL.",
+            "error"
+        );
+
+        campoURL.focus();
+
+        return;
+
+    }
+
+    if(!/^https?:\/\//i.test(url)){
+
+        url =
+        "https://" + url;
+
+    }
+
+    data = url;
+
+}
+
+
+/* TEXTO */
+
+else if(tipo === "texto"){
+
+    const texto =
+    document
+    .getElementById("texto")
+    .value
+    .trim();
+
+    if(!texto){
+
+        mostrarMensaje(
+            "Ingresá el texto que querés convertir en QR.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data = texto;
+
+}
+
+
+/* WIFI */
+
+else if(tipo === "wifi"){
+
+    const ssid =
+    document
+    .getElementById("ssid")
+    .value;
+
+    const password =
+    document
+    .getElementById("wifiPassword")
+    .value;
+
+    const seguridad =
+    document
+    .getElementById("seguridad")
+    .value;
+
+    if(!ssid.trim()){
+
+        mostrarMensaje(
+            "Ingresá el nombre de la red WiFi.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "WIFI:T:" +
+    seguridad +
+    ";S:" +
+    escapeQR(ssid) +
+    ";P:" +
+    escapeQR(password) +
+    ";;";
+
+}
+
+
+/* WHATSAPP */
+
+else if(tipo === "whatsapp"){
+
+    const numero =
+    document
+    .getElementById("numero")
+    .value
+    .replace(/\D/g,"");
+
+    const texto =
+    document
+    .getElementById("mensajeWhatsapp")
+    .value
+    .trim();
+
+    if(!numero){
+
+        mostrarMensaje(
+            "Ingresá un número de WhatsApp.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(numero.length < 8){
+
+        mostrarMensaje(
+            "Ingresá un número de WhatsApp válido con código de país.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "https://wa.me/" +
+    numero;
+
+    if(texto){
+
+        data +=
+        "?text=" +
+        encodeURIComponent(texto);
+
+    }
+
+}
+
+
+/* EMAIL */
+
+else if(tipo === "email"){
+
+    const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
+
+    const asunto =
+    document
+    .getElementById("asunto")
+    .value
+    .trim();
+
+    const texto =
+    document
+    .getElementById("mensajeEmail")
+    .value
+    .trim();
+
+    if(!email){
+
+        mostrarMensaje(
+            "Ingresá una dirección de email.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+
+        mostrarMensaje(
+            "Ingresá una dirección de email válida.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "mailto:" +
+    email;
+
+    const parametros = [];
+
+
+    if(asunto){
+
+        parametros.push(
+            "subject=" +
+            encodeURIComponent(asunto)
+        );
+
+    }
+
+
+    if(texto){
+
+        parametros.push(
+            "body=" +
+            encodeURIComponent(texto)
+        );
+
+    }
+
+
+    if(parametros.length){
+
+        data +=
+        "?" +
+        parametros.join("&");
+
+    }
+
+}
+
+
+/* TELEFONO */
+
+else if(tipo === "telefono"){
+
+    const numero =
+    document
+    .getElementById("numero")
+    .value
+    .trim();
+
+    if(!numero){
+
+        mostrarMensaje(
+            "Ingresá un número de teléfono.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "tel:" +
+    numero;
+
+}
+
+
+/* SMS */
+
+else if(tipo === "sms"){
+
+    const numero =
+    document
+    .getElementById("numero")
+    .value
+    .trim();
+
+    const texto =
+    document
+    .getElementById("mensajeSMS")
+    .value
+    .trim();
+
+    if(!numero){
+
+        mostrarMensaje(
+            "Ingresá un número de teléfono.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "SMSTO:" +
+    numero +
+    ":" +
+    texto;
+
+}
+
+
+/* UBICACION */
+
+else if(tipo === "ubicacion"){
+
+    const lat =
+    document
+    .getElementById("lat")
+    .value
+    .trim();
+
+    const lon =
+    document
+    .getElementById("lon")
+    .value
+    .trim();
+
+    if(!lat || !lon){
+
+        mostrarMensaje(
+            "Completá la latitud y longitud.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const latitud =
+    Number(lat);
+
+    const longitud =
+    Number(lon);
+
+
+    if(
+        !Number.isFinite(latitud) ||
+        latitud < -90 ||
+        latitud > 90
+    ){
+
+        mostrarMensaje(
+            "La latitud debe estar entre -90 y 90.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isFinite(longitud) ||
+        longitud < -180 ||
+        longitud > 180
+    ){
+
+        mostrarMensaje(
+            "La longitud debe estar entre -180 y 180.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    data =
+    "geo:" +
+    latitud +
+    "," +
+    longitud;
+
+}
+
+
+/* CONTACTO */
+
+else if(tipo === "contacto"){
+
+    const nombre =
+    document
+    .getElementById("nombre")
+    .value
+    .trim();
+
+    const telefono =
+    document
+    .getElementById("telefono")
+    .value
+    .trim();
+
+    const email =
+    document
+    .getElementById("emailContacto")
+    .value
+    .trim();
+
+    const empresa =
+    document
+    .getElementById("empresa")
+    .value
+    .trim();
+
+    const web =
+    document
+    .getElementById("web")
+    .value
+    .trim();
+
+
+    if(!nombre){
+
+        mostrarMensaje(
+            "Ingresá el nombre del contacto.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    data =
+    "BEGIN:VCARD\n" +
+    "VERSION:3.0\n" +
+    "FN:" +
+    escaparVCF(nombre) +
+    "\n";
+
+
+    if(empresa){
+
+        data +=
+        "ORG:" +
+        escaparVCF(empresa) +
+        "\n";
+
+    }
+
+
+    if(telefono){
+
+        data +=
+        "TEL:" +
+        escaparVCF(telefono) +
+        "\n";
+
+    }
+
+
+    if(email){
+
+        data +=
+        "EMAIL:" +
+        escaparVCF(email) +
+        "\n";
+
+    }
+
+
+    if(web){
+
+        data +=
+        "URL:" +
+        escaparVCF(web) +
+        "\n";
+
+    }
+
+
+    data +=
+    "END:VCARD";
+
+}
+
+
+/* EVENTO */
+
+else if(tipo === "evento"){
+
+    const titulo =
+    document
+    .getElementById("titulo")
+    .value
+    .trim();
+
+    const lugar =
+    document
+    .getElementById("lugar")
+    .value
+    .trim();
+
+    const inicioValor =
+    document
+    .getElementById("inicio")
+    .value;
+
+    const finValor =
+    document
+    .getElementById("fin")
+    .value;
+
+
+    if(!titulo){
+
+        mostrarMensaje(
+            "Ingresá el título del evento.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!inicioValor){
+
+        mostrarMensaje(
+            "Ingresá la fecha y hora de inicio.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const inicio =
+    formatearFechaEvento(inicioValor);
+
+    const fin =
+    finValor
+    ? formatearFechaEvento(finValor)
+    : "";
+
+
+    data =
+    "BEGIN:VEVENT\n" +
+    "VERSION:2.0\n" +
+    "SUMMARY:" +
+    escaparVCF(titulo) +
+    "\n";
+
+
+    if(lugar){
+
+        data +=
+        "LOCATION:" +
+        escaparVCF(lugar) +
+        "\n";
+
+    }
+
+
+    data +=
+    "DTSTART:" +
+    inicio +
+    "\n";
+
+
+    if(fin){
+
+        data +=
+        "DTEND:" +
+        fin +
+        "\n";
+
+    }
+
+
+    data +=
+    "END:VEVENT";
+
+}
+
+
+/* BITCOIN */
+
+else if(tipo === "bitcoin"){
+
+    const direccion =
+    document
+    .getElementById("direccionBitcoin")
+    .value
+    .trim();
+
+    const monto =
+    document
+    .getElementById("montoBitcoin")
+    .value
+    .trim();
+
+
+    if(!direccion){
+
+        mostrarMensaje(
+            "Ingresá una dirección Bitcoin.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    data =
+    "bitcoin:" +
+    direccion;
+
+
+    if(monto){
+
+        const cantidadBTC =
+        Number(monto);
+
+
+        if(
+            !Number.isFinite(cantidadBTC) ||
+            cantidadBTC <= 0
+        ){
+
+            mostrarMensaje(
+                "Ingresá un monto BTC válido.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        data +=
+        "?amount=" +
+        encodeURIComponent(cantidadBTC);
+
+    }
+
+}
+
+
+/* ETHEREUM */
+
+else if(tipo === "ethereum"){
+
+    const direccion =
+    document
+    .getElementById("direccionEthereum")
+    .value
+    .trim();
+
+    const monto =
+    document
+    .getElementById("montoEthereum")
+    .value
+    .trim();
+
+
+    if(!direccion){
+
+        mostrarMensaje(
+            "Ingresá una dirección Ethereum.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !/^0x[a-fA-F0-9]{40}$/.test(direccion)
+    ){
+
+        mostrarMensaje(
+            "La dirección Ethereum no parece válida.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    data =
+    "ethereum:" +
+    direccion;
+
+
+    if(monto){
+
+        const cantidadETH =
+        Number(monto);
+
+
+        if(
+            !Number.isFinite(cantidadETH) ||
+            cantidadETH <= 0
+        ){
+
+            mostrarMensaje(
+                "Ingresá un monto ETH válido.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const wei =
+        BigInt(
+            Math.round(
+                cantidadETH * 1e18
+            )
+        );
+
+
+        data +=
+        "?value=" +
+        wei.toString();
+
+    }
+
+}
+
+
+/* =================================================
+   VALIDACION FINAL
+================================================= */
+
+if(!data.trim()){
+
+    mostrarMensaje(
+        "Completá los datos para generar el código QR.",
+        "error"
+    );
+
+    return;
+
+}
+
+
+/* LIMPIAR QR */
+
+qrcode.innerHTML = "";
+
+download.style.display = "none";
+
+
+/* =================================================
+   GENERAR QR
+================================================= */
+
+try{
+
+    new QRCode(
+        qrcode,
+        {
+            text:data,
+
+            width:300,
+
+            height:300,
+
+            correctLevel:
+            QRCode.CorrectLevel.H
+        }
+    );
+
+}
+
+catch(error){
+
+    console.error(
+        "Error generando QR:",
+        error
+    );
+
+    mostrarMensaje(
+        "No se pudo generar el código QR.",
+        "error"
+    );
+
+    return;
+
+}
+
+
+/* =================================================
+   PREPARAR DESCARGA
+================================================= */
+
+setTimeout(
+function(){
+
+    const canvas =
+    qrcode.querySelector("canvas");
+
+    const imagen =
+    qrcode.querySelector("img");
+
+
+    if(canvas){
+
+        try{
+
+            download.href =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+            download.download =
+            "utilmooz-qr.png";
+
+            download.style.display =
+            "block";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            mostrarMensaje(
+                "El QR fue generado, pero no se pudo preparar la descarga.",
+                "error"
+            );
+
+            return;
+
+        }
+
+    }
+
+    else if(imagen){
+
+        download.href =
+        imagen.src;
+
+        download.download =
+        "utilmooz-qr.png";
+
+        download.style.display =
+        "block";
+
+    }
+
+
+    mostrarMensaje(
+        "✓ Código QR generado correctamente.",
+        "exito"
+    );
+
+
+    if(window.innerWidth <= 600){
+
+        setTimeout(
+        function(){
+
+            qrcode.scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"center"
+
+            });
+
+        },100);
+
+    }
+
+},300);
+
+}
+
+/* =====================================================
+ESCAPAR DATOS WIFI
+===================================================== */
+
+function escapeQR(text){
+
+return String(text || "")
+
+.replace(
+    /\\/g,
+    "\\\\"
+)
+
+.replace(
+    /;/g,
+    "\\;"
+)
+
+.replace(
+    /,/g,
+    "\\,"
+)
+
+.replace(
+    /:/g,
+    "\\:"
+)
+
+.replace(
+    /"/g,
+    '\\"'
+)
+
+.replace(
+    /\n/g,
+    "\\n"
+);
+
+}
+
+/* =====================================================
+ESCAPAR VCARD
+===================================================== */
+
+function escaparVCF(text){
+
+return String(text || "")
+
+.replace(
+    /\\/g,
+    "\\\\"
+)
+
+.replace(
+    /\n/g,
+    "\\n"
+)
+
+.replace(
+    /;/g,
+    "\\;"
+)
+
+.replace(
+    /,/g,
+    "\\,"
+);
+
+}
+
+/* =====================================================
+FORMATEAR FECHA
+===================================================== */
+
+function formatearFechaEvento(valor){
+
+if(!valor){
+
+    return "";
+
+}
+
+
+const fecha =
+new Date(valor);
+
+
+if(
+    Number.isNaN(
+        fecha.getTime()
+    )
+){
+
+    return "";
+
+}
+
+
+const año =
+fecha.getFullYear();
+
+
+const mes =
+String(
+    fecha.getMonth() + 1
+).padStart(2,"0");
+
+
+const dia =
+String(
+    fecha.getDate()
+).padStart(2,"0");
+
+
+const horas =
+String(
+    fecha.getHours()
+).padStart(2,"0");
+
+
+const minutos =
+String(
+    fecha.getMinutes()
+).padStart(2,"0");
+
+
+return (
+    año +
+    mes +
+    dia +
+    "T" +
+    horas +
+    minutos +
+    "00"
+);
+
+}
+
+/* =====================================================
+MENSAJE
+===================================================== */
+
+function mostrarMensaje(
+texto,
+tipo
+){
+
+mensaje.textContent =
+texto;
+
+mensaje.className =
+"mensaje " +
+tipo;
+
+}
+
+/* =====================================================
+OCULTAR MENSAJE
+===================================================== */
+
+function ocultarMensaje(){
+
+mensaje.textContent =
+"";
+
+mensaje.className =
+"mensaje";
+
+}
+
+/* =====================================================
+ENTER PARA GENERAR
+===================================================== */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(
+    event.key === "Enter" &&
+    event.target.tagName !== "TEXTAREA" &&
+    event.target.tagName !== "SELECT"
+){
+
+    generar();
+
+}
+
+});
+
+/* =====================================================
+INICIAR
+===================================================== */
+
+crearFormulario();
+
+</script>
+
+</body>
+</html>

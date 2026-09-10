@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Porcentaje Online | UtilMooz</title>
+
+<meta name="description"
+content="Calculadora de porcentaje online gratis. Calculá porcentajes, descuentos, aumentos y diferencias porcentuales de forma rápida y sencilla.">
+
+
+<!-- =====================================================
+     ADSTERRA POPUNDER
+===================================================== -->
+
+<script src="https://pl31074088.profitableratecpmnetwork.com/b3/e1/f2/b3e1f2f8b30c35d54a787cfe893ac42b.js"></script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+background:#111827;
+color:white;
+padding:22px 20px;
+}
+
+.header-content{
+max-width:900px;
+margin:auto;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+gap:20px;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+}
+
+.logo span{
+color:#4f8cff;
+}
+
+
+/* =====================================================
+   BOTON INICIO
+===================================================== */
+
+.home-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+background:#4f8cff;
+
+color:#fff;
+
+text-decoration:none;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+font-size:15px;
+
+font-weight:bold;
+
+transition:.2s;
+}
+
+.home-btn:hover{
+background:#3978e8;
+
+transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+.container{
+max-width:700px;
+margin:50px auto;
+padding:0 20px 60px;
+}
+
+h1{
+font-size:36px;
+margin-bottom:15px;
+}
+
+.description{
+color:#667085;
+margin-bottom:30px;
+line-height:1.6;
+}
+
+
+/* =====================================================
+   ANUNCIOS
+===================================================== */
+
+.ad-container{
+width:100%;
+min-height:90px;
+
+margin:25px 0;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+}
+
+.ad-label{
+font-size:11px;
+color:#98a2b3;
+
+text-align:center;
+
+margin-bottom:7px;
+}
+
+.ad-box{
+width:100%;
+min-height:90px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+}
+
+
+/* =====================================================
+   CALCULADORA
+===================================================== */
+
+.calculator{
+background:white;
+
+padding:30px;
+
+border-radius:16px;
+
+border:1px solid #e6e8ee;
+
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+label{
+display:block;
+
+margin-bottom:8px;
+
+font-weight:bold;
+}
+
+input{
+width:100%;
+
+padding:14px;
+
+margin-bottom:20px;
+
+border:1px solid #d9dde5;
+
+border-radius:8px;
+
+font-size:16px;
+
+outline:none;
+}
+
+input:focus{
+border-color:#4f8cff;
+}
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
+button{
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:8px;
+
+background:#4f8cff;
+
+color:white;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+button:hover{
+background:#3978e8;
+}
+
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+.resultado{
+margin-top:25px;
+
+padding:20px;
+
+background:#f5f7fb;
+
+border-radius:10px;
+
+text-align:center;
+
+font-size:22px;
+
+font-weight:bold;
+
+line-height:1.7;
+}
+
+
+/* =====================================================
+   RESULTADOS EXTRA
+===================================================== */
+
+.resultados-extra{
+margin-top:15px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:10px;
+}
+
+.extra{
+background:#f5f7fb;
+
+padding:15px;
+
+border-radius:8px;
+
+text-align:center;
+}
+
+.extra strong{
+display:block;
+
+font-size:18px;
+
+margin-bottom:5px;
+}
+
+.extra span{
+font-size:13px;
+
+color:#667085;
+}
+
+
+/* =====================================================
+   INFORMACIÓN
+===================================================== */
+
+.info{
+margin-top:35px;
+
+line-height:1.7;
+
+color:#4b5563;
+}
+
+.info h2{
+margin-bottom:10px;
+
+margin-top:25px;
+
+font-size:24px;
+}
+
+.info p{
+margin-bottom:12px;
+}
+
+
+/* =====================================================
+   EJEMPLOS
+===================================================== */
+
+.ejemplos{
+
+margin-top:20px;
+
+background:white;
+
+border:1px solid #e6e8ee;
+
+border-radius:12px;
+
+padding:20px;
+}
+
+.ejemplos div{
+
+padding:12px 0;
+
+border-bottom:1px solid #eee;
+}
+
+.ejemplos div:last-child{
+border-bottom:none;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+margin-top:60px;
+
+background:#111827;
+
+color:#aaa;
+
+text-align:center;
+
+padding:30px;
+}
+
+
+/* =====================================================
+   MOVIL
+===================================================== */
+
+@media(max-width:600px){
+
+.header-content{
+gap:12px;
+}
+
+.logo{
+font-size:24px;
+}
+
+.home-btn{
+padding:9px 13px;
+font-size:14px;
+}
+
+h1{
+font-size:30px;
+}
+
+.calculator{
+padding:22px;
+}
+
+.ad-container{
+min-height:70px;
+}
+
+.resultados-extra{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+
+<a href="index.html" class="home-btn">
+🏠 Inicio
+</a>
+
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main class="container">
+
+
+<h1>
+Calculadora de porcentaje
+</h1>
+
+
+<p class="description">
+
+Calculá fácilmente porcentajes de cualquier número utilizando
+esta calculadora online gratuita. También podés utilizarla para
+calcular descuentos, aumentos y operaciones cotidianas.
+
+</p>
+
+
+<!-- =====================================================
+     ANUNCIO 1 - NATIVE
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CALCULADORA
+===================================================== -->
+
+<div class="calculator">
+
+
+<label for="porcentaje">
+Porcentaje
+</label>
+
+<input
+type="number"
+id="porcentaje"
+placeholder="Ejemplo: 20"
+step="any"
+>
+
+
+<label for="numero">
+Número
+</label>
+
+<input
+type="number"
+id="numero"
+placeholder="Ejemplo: 500"
+step="any"
+>
+
+
+<button onclick="calcular()">
+Calcular porcentaje
+</button>
+
+
+<div
+class="resultado"
+id="resultado">
+
+Resultado: -
+
+</div>
+
+
+<div class="resultados-extra">
+
+
+<div class="extra">
+
+<strong id="aumentado">
+-
+</strong>
+
+<span>
+Número + porcentaje
+</span>
+
+</div>
+
+
+<div class="extra">
+
+<strong id="reducido">
+-
+</strong>
+
+<span>
+Número - porcentaje
+</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     ANUNCIO 2 - BANNER
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+
+<script>
+
+atOptions = {
+
+'key' : '56c8323b8c9bd2913adcf628996d2229',
+
+'format' : 'iframe',
+
+'height' : 60,
+
+'width' : 468,
+
+'params' : {}
+
+};
+
+</script>
+
+
+<script
+src="https://www.highrevenueformat.com/56c8323b8c9bd2913adcf628996d2229/invoke.js">
+</script>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     INFORMACIÓN SEO
+===================================================== -->
+
+<div class="info">
+
+
+<h2>
+¿Cómo calcular un porcentaje?
+</h2>
+
+
+<p>
+
+Para calcular un porcentaje, multiplicá el número por el
+porcentaje y dividilo por 100.
+
+</p>
+
+
+<p>
+
+Por ejemplo, para calcular el 20% de 500:
+
+</p>
+
+
+<p>
+
+<strong>
+500 × 20 ÷ 100 = 100
+</strong>
+
+</p>
+
+
+<h2>
+Ejemplos de porcentajes
+</h2>
+
+
+<div class="ejemplos">
+
+
+<div>
+
+<strong>
+10% de 100
+</strong>
+
+<br>
+
+100 × 10 ÷ 100 = 10
+
+</div>
+
+
+<div>
+
+<strong>
+15% de 200
+</strong>
+
+<br>
+
+200 × 15 ÷ 100 = 30
+
+</div>
+
+
+<div>
+
+<strong>
+20% de 500
+</strong>
+
+<br>
+
+500 × 20 ÷ 100 = 100
+
+</div>
+
+
+<div>
+
+<strong>
+25% de 800
+</strong>
+
+<br>
+
+800 × 25 ÷ 100 = 200
+
+</div>
+
+
+<div>
+
+<strong>
+30% de 1.000
+</strong>
+
+<br>
+
+1.000 × 30 ÷ 100 = 300
+
+</div>
+
+
+</div>
+
+
+<h2>
+Calculadora de descuentos
+</h2>
+
+
+<p>
+
+También podés utilizar esta herramienta para calcular
+descuentos. Por ejemplo, si un producto cuesta $10.000
+y tiene un descuento del 20%, el descuento es de $2.000
+y el precio final es de $8.000.
+
+</p>
+
+
+<h2>
+Calculadora de aumentos
+</h2>
+
+
+<p>
+
+La calculadora también permite conocer cuánto aumenta
+un número al aplicarle un determinado porcentaje.
+
+</p>
+
+
+<p>
+
+Por ejemplo, aumentar $500 un 20% da como resultado
+$600.
+
+</p>
+
+
+<h2>
+Calculadora de porcentajes online
+</h2>
+
+
+<p>
+
+Esta herramienta permite calcular rápidamente el porcentaje
+de un número sin necesidad de instalar ningún programa.
+
+</p>
+
+
+<p>
+
+Podés utilizarla para cálculos cotidianos, tareas escolares,
+estudios, compras, descuentos, aumentos y otras operaciones.
+
+</p>
+
+
+</div>
+
+
+<!-- =====================================================
+     ANUNCIO 3 - NATIVE
+===================================================== -->
+
+<div class="ad-container">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<div class="ad-box">
+
+
+<script
+async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+© 2026 UtilMooz — Herramientas online gratuitas
+
+</footer>
+
+
+<!-- =====================================================
+     ADSTERRA SOCIAL BAR
+===================================================== -->
+
+<script
+src="https://pl31074089.profitableratecpmnetwork.com/b9/80/b1/b980b1630aa36c566498dbf6055d89ea.js">
+</script>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+function calcular(){
+
+
+const porcentaje =
+parseFloat(
+document.getElementById("porcentaje").value
+);
+
+
+const numero =
+parseFloat(
+document.getElementById("numero").value
+);
+
+
+const resultado =
+document.getElementById("resultado");
+
+
+const aumentado =
+document.getElementById("aumentado");
+
+
+const reducido =
+document.getElementById("reducido");
+
+
+/* VALIDACIÓN */
+
+if(
+isNaN(porcentaje) ||
+isNaN(numero)
+){
+
+resultado.textContent =
+"Ingresá ambos valores.";
+
+aumentado.textContent =
+"-";
+
+reducido.textContent =
+"-";
+
+return;
+
+}
+
+
+/* PORCENTAJE */
+
+const calculo =
+(numero * porcentaje) / 100;
+
+
+/* AUMENTO */
+
+const valorAumentado =
+numero + calculo;
+
+
+/* DESCUENTO */
+
+const valorReducido =
+numero - calculo;
+
+
+/* MOSTRAR RESULTADO */
+
+resultado.innerHTML =
+porcentaje +
+"% de " +
+formatear(numero) +
+" = <strong>" +
+formatear(calculo) +
+"</strong>";
+
+
+/* MOSTRAR EXTRAS */
+
+aumentado.textContent =
+formatear(valorAumentado);
+
+
+reducido.textContent =
+formatear(valorReducido);
+
+}
+
+
+/* =====================================================
+   FORMATO DE NÚMEROS
+===================================================== */
+
+function formatear(numero){
+
+return new Intl.NumberFormat(
+"es-AR",
+{
+maximumFractionDigits:10
+}
+).format(numero);
+
+}
+
+
+/* =====================================================
+   ENTER PARA CALCULAR
+===================================================== */
+
+document
+.getElementById("porcentaje")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+calcular();
+
+}
+
+});
+
+
+document
+.getElementById("numero")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+calcular();
+
+}
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
+

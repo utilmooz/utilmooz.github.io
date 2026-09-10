@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cronómetro Online | UtilMooz</title>
+
+<meta name="description" content="Cronómetro online gratis. Medí el tiempo fácilmente desde tu navegador sin instalar ninguna aplicación.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+header{
+background:#111827;
+color:white;
+padding:22px 20px;
+}
+
+.header-content{
+max-width:900px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+}
+
+.logo{font-size:26px;font-weight:bold}
+.logo span{color:#4f8cff}
+
+/* BOTÓN INICIO */
+
+.home-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#4f8cff;
+color:#fff;
+text-decoration:none;
+padding:10px 18px;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+transition:.2s;
+}
+
+.home-btn:hover{
+background:#3978e8;
+transform:translateY(-1px);
+}
+
+.container{
+max-width:700px;
+margin:50px auto;
+padding:0 20px;
+text-align:center;
+}
+
+h1{
+font-size:36px;
+margin-bottom:15px;
+}
+
+.description{
+color:#667085;
+margin-bottom:30px;
+line-height:1.6;
+}
+
+.calculator{
+background:white;
+padding:40px 30px;
+border-radius:16px;
+border:1px solid #e6e8ee;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+#tiempo{
+font-size:52px;
+font-weight:bold;
+margin-bottom:30px;
+font-variant-numeric:tabular-nums;
+}
+
+.botones{
+display:flex;
+gap:10px;
+}
+
+button{
+flex:1;
+padding:14px;
+border:none;
+border-radius:8px;
+background:#4f8cff;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#3978e8;
+}
+
+.vueltas{
+margin-top:25px;
+text-align:left;
+max-height:200px;
+overflow:auto;
+}
+
+.vuelta{
+padding:8px;
+border-bottom:1px solid #eee;
+}
+
+.ad-container{
+margin:30px auto;
+text-align:center;
+max-width:100%;
+}
+
+.ad-label{
+font-size:11px;
+color:#98a2b3;
+margin-bottom:7px;
+}
+
+footer{
+margin-top:60px;
+background:#111827;
+color:#aaa;
+text-align:center;
+padding:30px;
+}
+
+@media(max-width:600px){
+
+.header-content{
+gap:12px;
+}
+
+.logo{
+font-size:24px;
+}
+
+.home-btn{
+padding:9px 13px;
+font-size:14px;
+}
+
+#tiempo{
+font-size:40px;
+}
+
+.botones{
+flex-direction:column;
+}
+
+}
+</style>
+
+<!-- ADSTERRA POPUNDER -->
+
+<script src="https://pl31074088.profitableratecpmnetwork.com/b3/e1/f2/b3e1f2f8b30c35d54a787cfe893ac42b.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+<a href="index.html" class="home-btn">
+🏠 Inicio
+</a>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<h1>Cronómetro online</h1>
+
+<p class="description">
+Cronómetro gratuito para medir el tiempo directamente desde tu navegador.
+</p>
+
+<div class="calculator">
+
+<div id="tiempo">
+00:00:00.00
+</div>
+
+<div class="botones">
+
+<button onclick="iniciar()">Iniciar</button>
+
+<button onclick="pausar()">Pausar</button>
+
+<button onclick="reiniciar()">Reiniciar</button>
+
+<button onclick="vuelta()">Vuelta</button>
+
+</div>
+
+<div class="vueltas" id="vueltas"></div>
+
+</div>
+
+<!-- ADSTERRA NATIVE BANNER -->
+
+<div class="ad-container">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<script async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+<!-- ADSTERRA BANNER 468x60 -->
+
+<div class="ad-container">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<script>
+
+atOptions = {
+'key' : '56c8323b8c9bd2913adcf628996d2229',
+'format' : 'iframe',
+'height' : 60,
+'width' : 468,
+'params' : {}
+};
+
+</script>
+
+<script src="https://www.highrevenueformat.com/56c8323b8c9bd2913adcf628996d2229/invoke.js"></script>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 UtilMooz — Herramientas online gratuitas
+</footer>
+
+<!-- ADSTERRA SOCIAL BAR -->
+
+<script src="https://pl31074089.profitableratecpmnetwork.com/b9/80/b1/b980b1630aa36c566498dbf6055d89ea.js"></script>
+
+<script>
+
+let inicio=0;
+let tiempoAcumulado=0;
+let intervalo=null;
+
+function actualizar(){
+
+const ahora=Date.now();
+
+const tiempo=
+tiempoAcumulado+
+(inicio?ahora-inicio:0);
+
+const horas=
+Math.floor(tiempo/3600000);
+
+const minutos=
+Math.floor((tiempo%3600000)/60000);
+
+const segundos=
+Math.floor((tiempo%60000)/1000);
+
+const centesimas=
+Math.floor((tiempo%1000)/10);
+
+document.getElementById("tiempo").textContent=
+String(horas).padStart(2,"0")+":"+
+String(minutos).padStart(2,"0")+":"+
+String(segundos).padStart(2,"0")+"."+
+String(centesimas).padStart(2,"0");
+
+}
+
+function iniciar(){
+
+if(intervalo)return;
+
+inicio=Date.now();
+
+intervalo=setInterval(actualizar,10);
+
+}
+
+function pausar(){
+
+if(!intervalo)return;
+
+tiempoAcumulado+=
+Date.now()-inicio;
+
+inicio=0;
+
+clearInterval(intervalo);
+
+intervalo=null;
+
+actualizar();
+
+}
+
+function reiniciar(){
+
+clearInterval(intervalo);
+
+intervalo=null;
+
+inicio=0;
+
+tiempoAcumulado=0;
+
+document.getElementById("tiempo").textContent=
+"00:00:00.00";
+
+document.getElementById("vueltas").innerHTML="";
+
+}
+
+function vuelta(){
+
+if(!intervalo)return;
+
+const tiempo=
+document.getElementById("tiempo").textContent;
+
+const elemento=
+document.createElement("div");
+
+elemento.className="vuelta";
+
+elemento.textContent=
+"Vuelta: "+tiempo;
+
+document
+.getElementById("vueltas")
+.prepend(elemento);
+
+}
+
+</script>
+
+</body>
+</html>

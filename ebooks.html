@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Conversor de Libros Electrónicos Online | UtilMooz</title>
+
+<meta name="description"
+content="Conversor de libros electrónicos online gratuito. Convertí archivos EPUB y TXT directamente desde tu navegador con UtilMooz.">
+
+<meta name="keywords"
+content="conversor ebook, conversor epub, epub a txt, txt a epub, convertir libros electrónicos, convertir ebook online">
+
+<meta name="robots" content="index, follow">
+
+<!-- ============================= -->
+
+<!-- ADSTERRA POPUNDER -->
+
+<!-- ============================= -->
+
+<script src="https://pl31074088.profitableratecpmnetwork.com/b3/e1/f2/b3e1f2f8b30c35d54a787cfe893ac42b.js"></script>
+
+<!-- ============================= -->
+
+<!-- LIBRERÍA EPUB -->
+
+<!-- ============================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f5f5;
+color:#172033;
+line-height:1.5;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+height:76px;
+width:100%;
+background:#ffffff;
+border-bottom:1px solid #e1e1e1;
+position:sticky;
+top:0;
+z-index:10000;
+}
+
+.header-content{
+width:100%;
+max-width:1280px;
+height:76px;
+margin:0 auto;
+padding:0 25px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+
+font-size:29px;
+font-weight:800;
+
+color:#555;
+letter-spacing:-1.5px;
+white-space:nowrap;
+}
+
+.logo-mark{
+width:38px;
+height:38px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#2f7d32;
+border-radius:7px;
+}
+
+.logo-mark svg{
+width:25px;
+height:25px;
+fill:white;
+}
+
+.logo span{
+color:#2f7d32;
+}
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+nav{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+
+padding:10px 15px;
+
+border-radius:6px;
+
+font-size:15px;
+font-weight:600;
+
+transition:.2s;
+}
+
+nav a:hover{
+background:#f0f7f0;
+color:#28732c;
+}
+
+
+/* =========================
+   BOTÓN INICIO
+========================= */
+
+.home-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#4f8cff;
+color:#fff !important;
+text-decoration:none;
+padding:10px 18px;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+transition:.2s;
+}
+
+.home-btn:hover{
+background:#3978e8;
+transform:translateY(-1px);
+}
+
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.container{
+width:100%;
+max-width:850px;
+
+margin:45px auto;
+
+padding:0 20px 70px;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+h1{
+font-size:38px;
+line-height:1.2;
+
+margin-bottom:15px;
+
+color:#222;
+}
+
+.description{
+color:#667085;
+
+line-height:1.7;
+
+margin-bottom:30px;
+}
+
+
+/* =========================
+   ANUNCIOS
+========================= */
+
+.ad-box{
+width:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+margin:25px 0;
+
+overflow:hidden;
+}
+
+.ad-label{
+font-size:10px;
+color:#999;
+
+text-align:center;
+
+margin-bottom:6px;
+
+letter-spacing:.7px;
+}
+
+
+/* =========================
+   CONVERSOR
+========================= */
+
+.converter{
+background:#ffffff;
+
+border:1px solid #e0e0e0;
+
+border-radius:12px;
+
+padding:30px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+
+/* =========================
+   TIPO DE CONVERSIÓN
+========================= */
+
+.format-selector{
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+margin-bottom:25px;
+}
+
+.format-option{
+border:2px solid #e0e3e8;
+
+border-radius:10px;
+
+padding:18px;
+
+cursor:pointer;
+
+text-align:center;
+
+transition:.2s;
+}
+
+.format-option:hover{
+border-color:#2f7d32;
+}
+
+.format-option.active{
+border-color:#2f7d32;
+
+background:#f1f8f1;
+}
+
+.format-option strong{
+display:block;
+
+font-size:17px;
+
+margin-bottom:5px;
+}
+
+.format-option span{
+font-size:13px;
+
+color:#6b7280;
+}
+
+
+/* =========================
+   ARCHIVO
+========================= */
+
+.file-area{
+border:2px dashed #cfd5dc;
+
+border-radius:10px;
+
+padding:35px 20px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.2s;
+
+margin-bottom:20px;
+}
+
+.file-area:hover{
+border-color:#2f7d32;
+
+background:#f8fcf8;
+}
+
+.file-area svg{
+width:45px;
+height:45px;
+
+fill:#2f7d32;
+
+margin-bottom:12px;
+}
+
+.file-area strong{
+display:block;
+
+font-size:17px;
+
+margin-bottom:6px;
+}
+
+.file-area span{
+font-size:13px;
+
+color:#777;
+}
+
+#archivo{
+display:none;
+}
+
+
+/* =========================
+   ARCHIVO SELECCIONADO
+========================= */
+
+.file-selected{
+display:none;
+
+background:#f3f6f8;
+
+border-radius:8px;
+
+padding:14px;
+
+margin-bottom:20px;
+
+font-size:14px;
+}
+
+.file-selected strong{
+color:#2f7d32;
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+button{
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:8px;
+
+background:#2f7d32;
+
+color:white;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+button:hover{
+background:#256528;
+}
+
+button:disabled{
+background:#aab4aa;
+
+cursor:not-allowed;
+}
+
+
+/* =========================
+   ESTADO
+========================= */
+
+.estado{
+display:none;
+
+margin-top:20px;
+
+padding:15px;
+
+border-radius:8px;
+
+background:#f1f5f9;
+
+text-align:center;
+
+font-size:14px;
+
+color:#475569;
+}
+
+
+/* =========================
+   RESULTADO
+========================= */
+
+.resultado{
+display:none;
+
+margin-top:20px;
+
+padding:20px;
+
+border-radius:10px;
+
+background:#f0f8f0;
+
+border:1px solid #cfe5cf;
+
+text-align:center;
+}
+
+.resultado strong{
+display:block;
+
+font-size:17px;
+
+margin-bottom:12px;
+
+color:#245c28;
+}
+
+.descargar{
+display:inline-block;
+
+width:auto;
+
+padding:12px 25px;
+
+background:#2f7d32;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:7px;
+
+font-weight:bold;
+}
+
+.descargar:hover{
+background:#256528;
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.info{
+margin-top:45px;
+
+color:#5f6670;
+
+line-height:1.7;
+}
+
+.info h2{
+color:#222;
+
+font-size:24px;
+
+margin-top:28px;
+
+margin-bottom:10px;
+}
+
+.info p{
+margin-bottom:14px;
+}
+
+.info ul{
+padding-left:22px;
+
+margin-bottom:15px;
+}
+
+.info li{
+margin-bottom:7px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+background:#ffffff;
+
+border-top:1px solid #ddd;
+
+color:#777;
+
+text-align:center;
+
+padding:35px 20px;
+}
+
+footer p{
+font-size:13px;
+
+margin:5px 0;
+}
+
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media(max-width:600px){
+
+header{
+height:68px;
+}
+
+.header-content{
+height:68px;
+
+padding:0 15px;
+}
+
+.logo{
+font-size:24px;
+}
+
+.logo-mark{
+width:34px;
+height:34px;
+}
+
+nav a{
+font-size:14px;
+
+padding:8px;
+}
+
+.home-btn{
+padding:9px 13px;
+font-size:14px;
+}
+
+.container{
+margin-top:30px;
+}
+
+h1{
+font-size:30px;
+}
+
+.converter{
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ============================= -->
+
+<!-- HEADER -->
+
+<!-- ============================= -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+
+<div class="logo-mark">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M12 2a7 7 0 0 0-7 7c0 4.1 2.7 7.5 6.4 8.6V21H8v1h8v-1h-3.4v-3.4C16.3 16.5 19 13.1 19 9a7 7 0 0 0-7-7z"/>
+
+</svg>
+
+</div>
+
+Util<span>Mooz</span>
+
+</div>
+
+<nav>
+
+<a href="index.html" class="home-btn">
+🏠 Inicio
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- ============================= -->
+
+<!-- CONTENIDO -->
+
+<!-- ============================= -->
+
+<main class="container">
+
+<h1>
+Conversor de libros electrónicos
+</h1>
+
+<p class="description">
+
+Convertí tus libros electrónicos entre formatos de forma rápida y sencilla.
+Procesá tus archivos directamente desde tu navegador.
+
+</p>
+
+<!-- ============================= -->
+
+<!-- ANUNCIO -->
+
+<!-- ============================= -->
+
+<div class="ad-box">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<script>
+atOptions = {
+'key' : '56c8323b8c9bd2913adcf628996d2229',
+'format' : 'iframe',
+'height' : 60,
+'width' : 468,
+'params' : {}
+};
+</script>
+
+<script src="https://www.highrevenueformat.com/56c8323b8c9bd2913adcf628996d2229/invoke.js"></script>
+
+</div>
+
+</div>
+
+<!-- ============================= -->
+
+<!-- CONVERSOR -->
+
+<!-- ============================= -->
+
+<div class="converter">
+
+<div class="format-selector">
+
+<div
+class="format-option active"
+id="epubTxt"
+onclick="seleccionarConversion('epub-txt')"
+>
+
+<strong>
+EPUB → TXT
+</strong>
+
+<span>
+Extraer el texto del libro
+</span>
+
+</div>
+
+<div
+class="format-option"
+id="txtEpub"
+onclick="seleccionarConversion('txt-epub')"
+>
+
+<strong>
+TXT → EPUB
+</strong>
+
+<span>
+Crear un libro EPUB
+</span>
+
+</div>
+
+</div>
+
+<!-- ARCHIVO -->
+
+<label
+class="file-area"
+for="archivo"
+
+>
+
+<svg viewBox="0 0 24 24">
+
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2 4 4h-4zM8 13h8v2H8zm0 4h8v2H8z"/>
+
+</svg>
+
+<strong>
+Seleccioná tu archivo
+</strong>
+
+<span>
+Hacé clic para elegir un archivo
+</span>
+
+</label>
+
+<input
+type="file"
+id="archivo"
+accept=".epub"
+onchange="mostrarArchivo()"
+
+>
+
+<div
+class="file-selected"
+id="archivoSeleccionado"
+>
+
+Archivo seleccionado: <strong id="nombreArchivo"></strong>
+
+</div>
+
+<button
+id="convertirBtn"
+onclick="convertirArchivo()"
+disabled
+
+>
+
+Convertir archivo
+
+</button>
+
+<div
+class="estado"
+id="estado"
+>
+Procesando archivo...
+</div>
+
+<div
+class="resultado"
+id="resultado"
+>
+
+<strong>
+Conversión completada
+</strong>
+
+<a
+id="descargar"
+class="descargar"
+download
+
+>
+
+Descargar archivo </a>
+
+</div>
+
+</div>
+
+<!-- ============================= -->
+
+<!-- ANUNCIO -->
+
+<!-- ============================= -->
+
+<div class="ad-box">
+
+<div style="width:100%;">
+
+<div class="ad-label">
+PUBLICIDAD
+</div>
+
+<script async="async"
+data-cfasync="false"
+src="https://pl31074091.profitableratecpmnetwork.com/0121748aaaf83f5b10d651ea8ce56b39/invoke.js">
+</script>
+
+<div id="container-0121748aaaf83f5b10d651ea8ce56b39"></div>
+
+</div>
+
+</div>
+
+<!-- ============================= -->
+
+<!-- INFORMACIÓN SEO -->
+
+<!-- ============================= -->
+
+<div class="info">
+
+<h2>
+Conversor de libros electrónicos online
+</h2>
+
+<p>
+UtilMooz ofrece una herramienta sencilla para trabajar con libros
+electrónicos y convertir archivos directamente desde el navegador.
+No necesitás instalar programas adicionales.
+</p>
+
+<h2>
+EPUB a TXT
+</h2>
+
+<p>
+Convertí un libro EPUB a texto para obtener el contenido textual
+del libro y utilizarlo en otros programas o dispositivos.
+</p>
+
+<h2>
+TXT a EPUB
+</h2>
+
+<p>
+Transformá un archivo de texto en un libro electrónico EPUB que
+podés utilizar en lectores compatibles con este formato.
+</p>
+
+<h2>
+Formatos compatibles</h2>
+
+<ul>
+
+<li>EPUB</li>
+
+<li>TXT</li>
+
+</ul>
+
+<h2>
+Privacidad
+</h2>
+
+<p>
+El procesamiento de los archivos se realiza directamente en el
+navegador siempre que sea posible. Los archivos seleccionados
+no necesitan ser enviados a un servidor para realizar estas
+conversiones.
+</p>
+
+</div>
+
+</main>
+
+<!-- ============================= -->
+
+<!-- FOOTER -->
+
+<!-- ============================= -->
+
+<footer>
+
+<p>
+© 2026 UtilMooz — Herramientas online gratuitas
+</p>
+
+<p>
+Todas las herramientas funcionan directamente desde tu navegador.
+</p>
+
+</footer>
+
+<!-- ============================= -->
+
+<!-- ADSTERRA SOCIAL BAR -->
+
+<!-- ============================= -->
+
+<script src="https://pl31074089.profitableratecpmnetwork.com/b9/80/b1/b980b1630aa36c566498dbf6055d89ea.js"></script>
+
+<script>
+
+/* =============================
+   VARIABLES
+============================= */
+
+let conversion = "epub-txt";
+
+let archivoActual = null;
+
+
+/* =============================
+   SELECCIONAR CONVERSIÓN
+============================= */
+
+function seleccionarConversion(tipo){
+
+conversion = tipo;
+
+const epubTxt =
+document.getElementById("epubTxt");
+
+const txtEpub =
+document.getElementById("txtEpub");
+
+const archivo =
+document.getElementById("archivo");
+
+
+epubTxt.classList.remove("active");
+
+txtEpub.classList.remove("active");
+
+
+if(tipo === "epub-txt"){
+
+epubTxt.classList.add("active");
+
+archivo.accept = ".epub";
+
+}else{
+
+txtEpub.classList.add("active");
+
+archivo.accept = ".txt";
+
+}
+
+
+archivo.value = "";
+
+archivoActual = null;
+
+document.getElementById("archivoSeleccionado").style.display="none";
+
+document.getElementById("convertirBtn").disabled=true;
+
+document.getElementById("resultado").style.display="none";
+
+}
+
+
+/* =============================
+   MOSTRAR ARCHIVO
+============================= */
+
+function mostrarArchivo(){
+
+const input =
+document.getElementById("archivo");
+
+if(!input.files.length){
+
+return;
+
+}
+
+archivoActual =
+input.files[0];
+
+
+document.getElementById("nombreArchivo").textContent =
+archivoActual.name;
+
+
+document.getElementById("archivoSeleccionado").style.display =
+"block";
+
+
+document.getElementById("convertirBtn").disabled =
+false;
+
+
+document.getElementById("resultado").style.display =
+"none";
+
+}
+
+
+/* =============================
+   CONVERTIR
+============================= */
+
+async function convertirArchivo(){
+
+if(!archivoActual){
+
+return;
+
+}
+
+
+const estado =
+document.getElementById("estado");
+
+const resultado =
+document.getElementById("resultado");
+
+const boton =
+document.getElementById("convertirBtn");
+
+
+estado.style.display="block";
+
+resultado.style.display="none";
+
+boton.disabled=true;
+
+
+try{
+
+
+if(conversion === "epub-txt"){
+
+await convertirEPUBaTXT();
+
+}else{
+
+await convertirTXTaEPUB();
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+estado.textContent =
+"No se pudo convertir el archivo. Verificá que sea válido.";
+
+}
+
+
+boton.disabled=false;
+
+}
+
+
+/* =============================
+   EPUB → TXT
+============================= */
+
+async function convertirEPUBaTXT(){
+
+const zip =
+await JSZip.loadAsync(archivoActual);
+
+
+let texto = "";
+
+
+/* Buscar archivos XHTML / HTML */
+
+const archivos =
+Object.keys(zip.files);
+
+
+for(const nombre of archivos){
+
+const archivo =
+zip.files[nombre];
+
+
+if(
+!archivo.dir &&
+(
+nombre.toLowerCase().endsWith(".xhtml") ||
+nombre.toLowerCase().endsWith(".html") ||
+nombre.toLowerCase().endsWith(".htm")
+)
+){
+
+const contenido =
+await archivo.async("text");
+
+
+const parser =
+new DOMParser();
+
+
+const doc =
+parser.parseFromString(
+contenido,
+"text/html"
+);
+
+
+const body =
+doc.body;
+
+
+if(body){
+
+texto +=
+body.innerText.trim()
++
+"\n\n";
+
+}
+
+}
+
+}
+
+
+/* Limpiar texto */
+
+texto =
+texto
+.replace(/\n{3,}/g,"\n\n")
+.trim();
+
+
+if(!texto){
+
+throw new Error("No se encontró texto.");
+
+}
+
+
+const blob =
+new Blob(
+[texto],
+{
+type:"text/plain;charset=utf-8"
+}
+);
+
+
+const url =
+URL.createObjectURL(blob);
+
+
+const base =
+archivoActual.name
+.replace(/\.epub$/i,"");
+
+
+const enlace =
+document.getElementById("descargar");
+
+
+enlace.href =
+url;
+
+enlace.download =
+base + ".txt";
+
+
+enlace.textContent =
+"Descargar TXT";
+
+
+document.getElementById("estado").style.display="none";
+
+document.getElementById("resultado").style.display="block";
+
+}
+
+
+/* =============================
+   TXT → EPUB
+============================= */
+
+async function convertirTXTaEPUB(){
+
+const texto =
+await archivoActual.text();
+
+
+if(!texto.trim()){
+
+throw new Error("El archivo está vacío.");
+
+}
+
+
+/* Crear ZIP EPUB */
+
+const zip =
+new JSZip();
+
+
+/* mimetype */
+
+zip.file(
+"mimetype",
+"application/epub+zip",
+{
+compression:"STORE"
+}
+);
+
+
+/* Contenido */
+
+const contenido =
+texto
+.split(/\n\s*\n/)
+.map(parrafo =>
+"<p>"+
+escapeHTML(parrafo.trim())+
+"</p>"
+)
+.join("\n");
+
+
+/* container.xml */
+
+zip.folder("META-INF").file(
+"container.xml",
+`<?xml version="1.0" encoding="UTF-8"?>
+<container version="1.0"
+xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+<rootfiles>
+<rootfile
+full-path="OEBPS/content.opf"
+media-type="application/oebps-package+xml"/>
+</rootfiles>
+</container>`
+);
+
+
+/* XHTML */
+
+zip.folder("OEBPS").file(
+"content.xhtml",
+`<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Libro convertido</title>
+</head>
+<body>
+<h1>Libro convertido</h1>
+${contenido}
+</body>
+</html>`
+);
+
+
+/* OPF */
+
+zip.folder("OEBPS").file(
+"content.opf",
+`<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf"
+unique-identifier="BookId"
+version="2.0">
+
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<dc:title>Libro convertido</dc:title>
+
+<dc:language>es</dc:language>
+
+<dc:identifier id="BookId">
+utilmooz-${Date.now()}
+</dc:identifier>
+
+</metadata>
+
+<manifest>
+
+<item
+id="content"
+href="content.xhtml"
+media-type="application/xhtml+xml"/>
+
+</manifest>
+
+<spine>
+
+<itemref idref="content"/>
+
+</spine>
+
+</package>`
+);
+
+
+const blob =
+await zip.generateAsync(
+{
+type:"blob",
+mimeType:"application/epub+zip"
+}
+);
+
+
+const url =
+URL.createObjectURL(blob);
+
+
+const base =
+archivoActual.name
+.replace(/\.txt$/i,"");
+
+
+const enlace =
+document.getElementById("descargar");
+
+
+enlace.href =
+url;
+
+enlace.download =
+base + ".epub";
+
+
+enlace.textContent =
+"Descargar EPUB";
+
+
+document.getElementById("estado").style.display="none";
+
+document.getElementById("resultado").style.display="block";
+
+}
+
+
+/* =============================
+   ESCAPAR HTML
+============================= */
+
+function escapeHTML(text){
+
+return text
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+
+</html>

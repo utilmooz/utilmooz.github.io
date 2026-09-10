@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UtilMooz - Herramientas de Colores</title>
+<meta name="description" content="Color Picker, conversor HEX RGB HSL, contraste WCAG, gradientes y generadores CSS gratis.">
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+header,
+footer{
+background:#111827;
+color:#fff;
+}
+
+header{
+padding:20px;
+}
+
+footer{
+padding:25px;
+text-align:center;
+color:#aaa;
+}
+
+.wrap{
+max-width:1100px;
+margin:auto;
+}
+
+/* ================================
+   ENCABEZADO
+================================ */
+
+.header-content{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+}
+
+.logo span{
+color:#4f8cff;
+}
+
+.home-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#4f8cff;
+color:#fff;
+text-decoration:none;
+padding:10px 18px;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+transition:.2s;
+}
+
+.home-btn:hover{
+background:#3978e8;
+transform:translateY(-1px);
+}
+
+/* ================================
+   CONTENIDO
+================================ */
+
+main{
+max-width:1000px;
+margin:40px auto;
+padding:0 20px;
+}
+
+h1{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.desc{
+color:#667085;
+margin-bottom:25px;
+line-height:1.6;
+}
+
+/* ================================
+   ANUNCIOS
+================================ */
+
+.ad-container{
+width:100%;
+margin:25px auto;
+background:#fff;
+border:1px solid #e1e5ec;
+border-radius:10px;
+padding:10px;
+text-align:center;
+overflow:hidden;
+}
+
+.ad-title{
+font-size:10px;
+color:#98a2b3;
+margin-bottom:6px;
+text-transform:uppercase;
+letter-spacing:.5px;
+}
+
+.ad-native{
+min-height:100px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.ad-banner{
+min-height:80px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.banner-wrapper{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* ================================
+   HERRAMIENTAS
+================================ */
+
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-bottom:25px;
+}
+
+.tool{
+background:#fff;
+border:1px solid #ddd;
+border-radius:10px;
+padding:14px;
+cursor:pointer;
+transition:.2s;
+}
+
+.tool:hover{
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+.tool.active{
+border:2px solid #4f8cff;
+}
+
+.panel{
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+padding:25px;
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.panel h2{
+margin-bottom:8px;
+}
+
+.panel p{
+color:#667085;
+margin-bottom:15px;
+}
+
+input,
+button{
+width:100%;
+padding:12px;
+border-radius:8px;
+font-size:15px;
+margin:8px 0;
+}
+
+input{
+border:1px solid #d6dbe6;
+}
+
+input[type=color]{
+height:60px;
+padding:4px;
+}
+
+input[type=range]{
+padding:0;
+}
+
+button{
+background:#4f8cff;
+color:#fff;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#3978e8;
+}
+
+.result{
+background:#eef3ff;
+padding:18px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.color-box{
+height:120px;
+border-radius:10px;
+border:1px solid #ccc;
+margin:12px 0;
+}
+
+.code{
+background:#111827;
+color:#fff;
+padding:12px;
+border-radius:8px;
+font-family:monospace;
+white-space:pre-wrap;
+margin:10px 0;
+}
+
+.range{
+text-align:center;
+color:#4f8cff;
+font-weight:bold;
+margin-top:-5px;
+}
+
+.big{
+font-size:42px;
+font-weight:bold;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:600px){
+
+header{
+padding:16px;
+}
+
+.header-content{
+gap:12px;
+}
+
+.logo{
+font-size:24px;
+}
+
+.home-btn{
+padding:9px 13px;
+font-size:14px;
+}
+
+h1{
+font-size:30px;
+}
+
+main{
+margin:25px auto;
+padding:0 15px;
+}
+
+.panel{
+padding:18px;
+}
+
+.ad-container{
+margin:20px auto;
+}
+
+}
+
+/* Banner 468x60 adaptado para pantallas pequeñas */
+
+@media(max-width:500px){
+
+.banner-wrapper{
+transform:scale(.72);
+transform-origin:center;
+height:55px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="wrap header-content">
+
+<div class="logo">
+Util<span>Mooz</span>
+</div>
+
+<a href="index.html" class="home-btn">
+🏠 Inicio
+</a>
+
+</div>
+
+</header>
+
+<main>
+
+<h1>
+Herramientas de Colores
+</h1>
+
+<p class="desc">
+12 herramientas gratuitas para diseñadores y desarrolladores. Convertí colores, comprobá contraste y generá código CSS al instante.
+</p>
+
+<!-- =========================================
+     NATIVE BANNER
+     ANUNCIO FIJO / DENTRO DE LA PÁGINA
+     SIN POPUNDER
+========================================= -->
+
+<div class="ad-container ad-native">
+
+<div class="ad-title">
+Publicidad
+</div>
+
+<script async="async" data-cfasync="false" src="https://pl31111968.profitableratecpmnetwork.com/602ece9ec60ac6af897e5d7b5c27586a/invoke.js"></script>
+
+<div id="container-602ece9ec60ac6af897e5d7b5c27586a"></div>
+
+</div>
+
+<!-- =========================================
+     LISTA DE HERRAMIENTAS
+========================================= -->
+
+<div class="tools" id="tools"></div>
+
+<!-- =========================================
+     PANEL DE LA HERRAMIENTA
+========================================= -->
+
+<div class="panel">
+
+<h2 id="title">
+Color Picker
+</h2>
+
+<p id="description">
+Elegí un color.
+</p>
+
+<div id="form"></div>
+
+<div class="result" id="result">
+Esperando...
+</div>
+
+</div>
+
+<!-- =========================================
+     BANNER 468x60
+     ANUNCIO FIJO / DENTRO DE LA PÁGINA
+     SIN POPUNDER
+========================================= -->
+
+<div class="ad-container ad-banner">
+
+<div class="ad-title">
+Publicidad
+</div>
+
+<div class="banner-wrapper">
+
+<script>
+atOptions = {
+'key' : 'b707b54164f1f1d456e0b2d0a974ce3f',
+'format' : 'iframe',
+'height' : 60,
+'width' : 468,
+'params' : {}
+};
+</script>
+
+<script src="https://www.highrevenueformat.com/b707b54164f1f1d456e0b2d0a974ce3f/invoke.js"></script>
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 UtilMooz — Herramientas online
+</footer>
+
+<script>
+
+/* =========================================
+   LISTA DE HERRAMIENTAS
+========================================= */
+
+const toolList=[
+
+["picker","🎨 Color Picker"],
+
+["hexrgb","HEX → RGB"],
+
+["rgbhex","RGB → HEX"],
+
+["hexhsl","HEX → HSL"],
+
+["hslhex","HSL → HEX"],
+
+["contrast","⚫ Contraste"],
+
+["comp","🔄 Complementario"],
+
+["triad","🎨 Triádico"],
+
+["grad","🌈 Gradiente"],
+
+["shadow","🌑 Box Shadow"],
+
+["radius","⭕ Border Radius"],
+
+["text","✏️ Text Shadow"]
+
+];
+
+
+/* =========================================
+   CONFIGURACIÓN
+========================================= */
+
+const configs={
+
+picker:[
+
+"Elegí un color.",
+
+`<input type="color" id="color" value="#4f8cff">
+
+<button onclick="picker()">
+Analizar color
+</button>`
+
+],
+
+hexrgb:[
+
+"Convertí HEX a RGB.",
+
+`<input id="hex" placeholder="#4f8cff">
+
+<button onclick="hexRGB()">
+Convertir
+</button>`
+
+],
+
+rgbhex:[
+
+"Convertí RGB a HEX.",
+
+`<input id="r" type="number" min="0" max="255" placeholder="Rojo">
+
+<input id="g" type="number" min="0" max="255" placeholder="Verde">
+
+<input id="b" type="number" min="0" max="255" placeholder="Azul">
+
+<button onclick="rgbHEX()">
+Convertir
+</button>`
+
+],
+
+hexhsl:[
+
+"Convertí HEX a HSL.",
+
+`<input id="hex" placeholder="#4f8cff">
+
+<button onclick="hexHSL()">
+Convertir
+</button>`
+
+],
+
+hslhex:[
+
+"Convertí HSL a HEX.",
+
+`<input id="h" type="number" min="0" max="360" placeholder="Hue">
+
+<input id="s" type="number" min="0" max="100" placeholder="Saturation">
+
+<input id="l" type="number" min="0" max="100" placeholder="Lightness">
+
+<button onclick="hslHEX()">
+Convertir
+</button>`
+
+],
+
+contrast:[
+
+"Contraste WCAG.",
+
+`<label>Color 1</label>
+
+<input type="color" id="c1" value="#000000">
+
+<label>Color 2</label>
+
+<input type="color" id="c2" value="#ffffff">
+
+<button onclick="contrast()">
+Comprobar
+</button>`
+
+],
+
+comp:[
+
+"Color complementario.",
+
+`<input type="color" id="color" value="#4f8cff">
+
+<button onclick="complementario()">
+Generar
+</button>`
+
+],
+
+triad:[
+
+"Paleta triádica.",
+
+`<input type="color" id="color" value="#4f8cff">
+
+<button onclick="triadico()">
+Generar
+</button>`
+
+],
+
+grad:[
+
+"Generador de gradientes CSS.",
+
+`<label>Color 1</label>
+
+<input type="color" id="c1" value="#4f8cff">
+
+<label>Color 2</label>
+
+<input type="color" id="c2" value="#111827">
+
+<label>Ángulo</label>
+
+<input id="ang"
+type="range"
+min="0"
+max="360"
+value="90"
+oninput="document.getElementById('av').innerText=this.value">
+
+<div class="range" id="av">
+90
+</div>
+
+<button onclick="gradiente()">
+Generar CSS
+</button>`
+
+],
+
+shadow:[
+
+"Generador Box Shadow.",
+
+`<label>X</label>
+
+<input id="x"
+type="range"
+min="-30"
+max="30"
+value="5"
+oninput="document.getElementById('vx').innerText=this.value;shadow()">
+
+<div class="range" id="vx">
+5
+</div>
+
+<label>Y</label>
+
+<input id="y"
+type="range"
+min="-30"
+max="30"
+value="5"
+oninput="document.getElementById('vy').innerText=this.value;shadow()">
+
+<div class="range" id="vy">
+5
+</div>
+
+<label>Blur</label>
+
+<input id="blur"
+type="range"
+min="0"
+max="50"
+value="15"
+oninput="document.getElementById('vb').innerText=this.value;shadow()">
+
+<div class="range" id="vb">
+15
+</div>
+
+<label>Color</label>
+
+<input type="color"
+id="sc"
+value="#000000"
+oninput="shadow()">`
+
+],
+
+radius:[
+
+"Generador Border Radius.",
+
+`<input id="rad"
+type="range"
+min="0"
+max="100"
+value="12"
+oninput="document.getElementById('vr').innerText=this.value;radius()">
+
+<div class="range" id="vr">
+12
+</div>`
+
+],
+
+text:[
+
+"Generador Text Shadow.",
+
+`<label>X</label>
+
+<input id="tx"
+type="range"
+min="-20"
+max="20"
+value="2"
+oninput="document.getElementById('tvx').innerText=this.value;textshadow()">
+
+<div class="range" id="tvx">
+2
+</div>
+
+<label>Y</label>
+
+<input id="ty"
+type="range"
+min="-20"
+max="20"
+value="2"
+oninput="document.getElementById('tvy').innerText=this.value;textshadow()">
+
+<div class="range" id="tvy">
+2
+</div>
+
+<label>Blur</label>
+
+<input id="tb"
+type="range"
+min="0"
+max="30"
+value="5"
+oninput="document.getElementById('tvb').innerText=this.value;textshadow()">
+
+<div class="range" id="tvb">
+5
+</div>
+
+<label>Color</label>
+
+<input type="color"
+id="tc"
+value="#000000"
+oninput="textshadow()">`
+
+]
+
+};
+
+
+/* =========================================
+   ELEMENTOS PRINCIPALES
+========================================= */
+
+const tools=document.getElementById("tools");
+
+const title=document.getElementById("title");
+
+const description=document.getElementById("description");
+
+const form=document.getElementById("form");
+
+const result=document.getElementById("result");
+
+
+/* =========================================
+   CREAR BOTONES DE HERRAMIENTAS
+========================================= */
+
+toolList.forEach((t,i)=>{
+
+const div=document.createElement("div");
+
+div.className="tool"+(i===0?" active":"");
+
+div.innerHTML="<b>"+t[1]+"</b>";
+
+div.onclick=()=>selectTool(t[0],div);
+
+tools.appendChild(div);
+
+});
+
+
+/* =========================================
+   CAMBIAR HERRAMIENTA
+========================================= */
+
+function selectTool(name,el){
+
+document
+.querySelectorAll(".tool")
+.forEach(x=>x.classList.remove("active"));
+
+el.classList.add("active");
+
+title.innerText=
+toolList.find(t=>t[0]===name)[1];
+
+description.innerText=
+configs[name][0];
+
+form.innerHTML=
+configs[name][1];
+
+result.innerHTML=
+"Esperando...";
+
+if(name==="picker")
+picker();
+
+if(name==="shadow")
+shadow();
+
+if(name==="radius")
+radius();
+
+if(name==="text")
+textshadow();
+
+}
+
+
+/* =========================================
+   HEX → RGB
+========================================= */
+
+function hexToRGB(hex){
+
+hex=hex.replace("#","");
+
+return{
+
+r:parseInt(hex.substring(0,2),16),
+
+g:parseInt(hex.substring(2,4),16),
+
+b:parseInt(hex.substring(4,6),16)
+
+};
+
+}
+
+
+/* =========================================
+   RGB → HSL
+========================================= */
+
+function rgbToHSL(r,g,b){
+
+r/=255;
+g/=255;
+b/=255;
+
+const max=Math.max(r,g,b);
+
+const min=Math.min(r,g,b);
+
+let h=0;
+let s=0;
+
+const l=(max+min)/2;
+
+if(max!==min){
+
+const d=max-min;
+
+s=l>0.5
+?d/(2-max-min)
+:d/(max+min);
+
+switch(max){
+
+case r:
+
+h=(g-b)/d+(g<b?6:0);
+
+break;
+
+case g:
+
+h=(b-r)/d+2;
+
+break;
+
+case b:
+
+h=(r-g)/d+4;
+
+break;
+
+}
+
+h/=6;
+
+}
+
+return[
+
+Math.round(h*360),
+
+Math.round(s*100),
+
+Math.round(l*100)
+
+];
+
+}
+
+
+/* =========================================
+   HSL → RGB
+========================================= */
+
+function hslToRGB(h,s,l){
+
+s/=100;
+l/=100;
+
+const c=
+(1-Math.abs(2*l-1))*s;
+
+const x=
+c*(1-Math.abs((h/60)%2-1));
+
+const m=
+l-c/2;
+
+let r=0,
+g=0,
+b=0;
+
+if(h<60){
+
+r=c;
+g=x;
+
+}
+
+else if(h<120){
+
+r=x;
+g=c;
+
+}
+
+else if(h<180){
+
+g=c;
+b=x;
+
+}
+
+else if(h<240){
+
+g=x;
+b=c;
+
+}
+
+else if(h<300){
+
+r=x;
+b=c;
+
+}
+
+else{
+
+r=c;
+b=x;
+
+}
+
+return{
+
+r:Math.round((r+m)*255),
+
+g:Math.round((g+m)*255),
+
+b:Math.round((b+m)*255)
+
+};
+
+}
+
+
+/* =========================================
+   MOSTRAR RESULTADO
+========================================= */
+
+function mostrar(txt){
+
+result.innerHTML=txt;
+
+}
+
+
+/* =========================================
+   COPIAR CSS
+========================================= */
+
+function copiar(txt){
+
+navigator.clipboard.writeText(txt)
+.then(()=>alert("CSS copiado"))
+.catch(()=>alert("No se pudo copiar automáticamente."));
+
+}
+
+
+/* =========================================
+   COLOR PICKER
+========================================= */
+
+function picker(){
+
+const color=
+document.getElementById("color").value;
+
+const rgb=
+hexToRGB(color);
+
+const hsl=
+rgbToHSL(
+rgb.r,
+rgb.g,
+rgb.b
+);
+
+mostrar(`
+
+<div class="color-box"
+style="background:${color}">
+</div>
+
+<b>HEX:</b>
+${color}
+
+<br>
+
+<b>RGB:</b>
+rgb(${rgb.r}, ${rgb.g}, ${rgb.b})
+
+<br>
+
+<b>HSL:</b>
+hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)
+
+`);
+
+}
+
+
+/* =========================================
+   HEX → RGB
+========================================= */
+
+function hexRGB(){
+
+const input=
+document.getElementById("hex");
+
+const value=
+input.value.replace("#","");
+
+if(!/^[0-9A-Fa-f]{6}$/.test(value)){
+
+return mostrar("HEX inválido.");
+
+}
+
+const c=
+hexToRGB(value);
+
+mostrar(`
+
+<b>RGB:</b>
+
+rgb(${c.r}, ${c.g}, ${c.b})
+
+`);
+
+}
+
+
+/* =========================================
+   RGB → HEX
+========================================= */
+
+function rgbHEX(){
+
+const R=
+Number(document.getElementById("r").value);
+
+const G=
+Number(document.getElementById("g").value);
+
+const B=
+Number(document.getElementById("b").value);
+
+if(
+
+[R,G,B].some(
+v=>isNaN(v)||v<0||v>255
+)
+
+){
+
+return mostrar("RGB inválido.");
+
+}
+
+const hexValue=
+
+"#"+
+[R,G,B]
+.map(
+v=>v.toString(16).padStart(2,"0")
+)
+.join("")
+.toUpperCase();
+
+mostrar(`
+
+<b>HEX:</b>
+${hexValue}
+
+`);
+
+}
+
+
+/* =========================================
+   HEX → HSL
+========================================= */
+
+function hexHSL(){
+
+const value=
+document.getElementById("hex").value;
+
+if(!/^#?[0-9A-Fa-f]{6}$/.test(value)){
+
+return mostrar("HEX inválido.");
+
+}
+
+const c=
+hexToRGB(value);
+
+const o=
+rgbToHSL(
+c.r,
+c.g,
+c.b
+);
+
+mostrar(`
+
+<b>HSL:</b>
+
+hsl(${o[0]}, ${o[1]}%, ${o[2]}%)
+
+`);
+
+}
+
+
+/* =========================================
+   HSL → HEX
+========================================= */
+
+function hslHEX(){
+
+const h=
+Number(document.getElementById("h").value);
+
+const s=
+Number(document.getElementById("s").value);
+
+const l=
+Number(document.getElementById("l").value);
+
+if(
+
+isNaN(h)||
+isNaN(s)||
+isNaN(l)||
+h<0||
+h>360||
+s<0||
+s>100||
+l<0||
+l>100
+
+){
+
+return mostrar("Valores HSL inválidos.");
+
+}
+
+const c=
+hslToRGB(h,s,l);
+
+const hexValue=
+
+"#"+
+[c.r,c.g,c.b]
+.map(
+v=>v.toString(16).padStart(2,"0")
+)
+.join("")
+.toUpperCase();
+
+mostrar(`
+
+<b>HEX:</b>
+${hexValue}
+
+`);
+
+}
+
+
+/* =========================================
+   LUMINANCIA
+========================================= */
+
+function luminancia(hexValue){
+
+const c=
+hexToRGB(hexValue);
+
+const v=
+[c.r,c.g,c.b].map(x=>{
+
+x/=255;
+
+return x<=0.03928
+
+?x/12.92
+
+:Math.pow(
+(x+0.055)/1.055,
+2.4
+);
+
+});
+
+return
+
+0.2126*v[0]+
+0.7152*v[1]+
+0.0722*v[2];
+
+}
+
+
+/* =========================================
+   CONTRASTE WCAG
+========================================= */
+
+function contrast(){
+
+const color1=
+document.getElementById("c1").value;
+
+const color2=
+document.getElementById("c2").value;
+
+const ratio=
+
+(
+
+(
+Math.max(
+luminancia(color1),
+luminancia(color2)
+)+0.05
+)
+
+/
+
+(
+Math.min(
+luminancia(color1),
+luminancia(color2)
+)+0.05
+)
+
+).toFixed(2);
+
+mostrar(`
+
+<b>Contraste: ${ratio}:1</b>
+
+<br><br>
+
+AA:
+
+${ratio>=4.5
+?"✅ Cumple"
+:"❌ No cumple"}
+
+<br>
+
+AAA:
+
+${ratio>=7
+?"✅ Cumple"
+:"❌ No cumple"}
+
+`);
+
+}
+
+
+/* =========================================
+   COMPLEMENTARIO
+========================================= */
+
+function complementario(){
+
+const color=
+document.getElementById("color").value;
+
+const c=
+hexToRGB(color);
+
+const comp=
+
+"#"+
+[
+255-c.r,
+255-c.g,
+255-c.b
+]
+.map(
+v=>v.toString(16).padStart(2,"0")
+)
+.join("")
+.toUpperCase();
+
+mostrar(`
+
+<div class="color-box"
+style="background:${comp}">
+</div>
+
+<b>${comp}</b>
+
+`);
+
+}
+
+
+/* =========================================
+   TRIÁDICO
+========================================= */
+
+function triadico(){
+
+const color=
+document.getElementById("color").value;
+
+const c=
+hexToRGB(color);
+
+const hsl=
+rgbToHSL(
+c.r,
+c.g,
+c.b
+);
+
+let html="";
+
+[0,120,240].forEach(off=>{
+
+const n=
+hslToRGB(
+(hsl[0]+off)%360,
+hsl[1],
+hsl[2]
+);
+
+const hexValue=
+
+"#"+
+[n.r,n.g,n.b]
+.map(
+v=>v.toString(16).padStart(2,"0")
+)
+.join("")
+.toUpperCase();
+
+html+=`
+
+<div class="color-box"
+style="background:${hexValue}">
+</div>
+
+<b>${hexValue}</b>
+
+<br>
+
+`;
+
+});
+
+mostrar(html);
+
+}
+
+
+/* =========================================
+   GRADIENTE
+========================================= */
+
+function gradiente(){
+
+const angle=
+document.getElementById("ang").value;
+
+const color1=
+document.getElementById("c1").value;
+
+const color2=
+document.getElementById("c2").value;
+
+const css=
+
+`background: linear-gradient(${angle}deg, ${color1}, ${color2});`;
+
+mostrar(`
+
+<div class="color-box"
+style="${css}">
+</div>
+
+<div class="code">
+${css}
+</div>
+
+<button onclick="copiar('${css}')">
+📋 Copiar CSS
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   BOX SHADOW
+========================================= */
+
+function shadow(){
+
+const x=
+document.getElementById("x").value;
+
+const y=
+document.getElementById("y").value;
+
+const blur=
+document.getElementById("blur").value;
+
+const color=
+document.getElementById("sc").value;
+
+const css=
+
+`box-shadow:${x}px ${y}px ${blur}px ${color};`;
+
+mostrar(`
+
+<div class="color-box"
+style="background:#fff;${css}">
+</div>
+
+<div class="code">
+${css}
+</div>
+
+<button onclick="copiar('${css}')">
+📋 Copiar CSS
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   BORDER RADIUS
+========================================= */
+
+function radius(){
+
+const value=
+document.getElementById("rad").value;
+
+const css=
+`border-radius:${value}px;`;
+
+mostrar(`
+
+<div class="color-box"
+style="background:#4f8cff;${css}">
+</div>
+
+<div class="code">
+${css}
+</div>
+
+<button onclick="copiar('${css}')">
+📋 Copiar CSS
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   TEXT SHADOW
+========================================= */
+
+function textshadow(){
+
+const x=
+document.getElementById("tx").value;
+
+const y=
+document.getElementById("ty").value;
+
+const blur=
+document.getElementById("tb").value;
+
+const color=
+document.getElementById("tc").value;
+
+const css=
+`text-shadow:${x}px ${y}px ${blur}px ${color};`;
+
+mostrar(`
+
+<div class="big"
+style="${css}">
+UtilMooz
+</div>
+
+<div class="code">
+${css}
+</div>
+
+<button onclick="copiar('${css}')">
+📋 Copiar CSS
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+selectTool(
+"picker",
+document.querySelector(".tool")
+);
+
+</script>
+
+</body>
+</html>
